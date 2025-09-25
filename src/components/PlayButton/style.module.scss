@@ -1,0 +1,11 @@
+.container {
+  align-items: center;
+  background-color: $color-red-500;
+  border-radius: convertPxToRem(50);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: convertPxToRem(100);
+  justify-content: center;
+  width: convertPxToRem(100);
+}

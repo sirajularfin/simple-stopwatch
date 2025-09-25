@@ -5,7 +5,7 @@ interface IProps {
 	count?: number;
 }
 
-const TimeTicks: React.FC<IProps> = ({ count }) => {
+const TimeTick: React.FC<IProps> = ({ count }) => {
 	return (
 		<div className={classes.container}>
 			<div className={classes.tickWrapper}>
@@ -15,4 +15,4 @@ const TimeTicks: React.FC<IProps> = ({ count }) => {
 	);
 };
 
-export default TimeTicks;
+export default TimeTick;
