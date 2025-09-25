@@ -1,0 +1,7 @@
+@use 'sass:math';
+@use './variables.scss' as *;
+
+// Function to convert pixels to rem
+@function convertPxToRem($px, $base: $default-font-size) {
+  @return math.div($px, $base) * 1rem;
+}
