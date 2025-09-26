@@ -1,4 +1,4 @@
-import { ArrowRightIcon } from '@/assets';
+import { PauseIcon, ResumeIcon } from '@/assets';
 import classes from './style.module.scss';
 
 interface IProps {
@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const PlayButton: React.FC<IProps> = ({ isPlaying }) => {
-	return <button className={classes.container}>{!isPlaying ? <ArrowRightIcon /> : 'Play'}</button>;
+	return <button className={classes.container}>{isPlaying ? <PauseIcon /> : <ResumeIcon />}</button>;
 };
 
 export default PlayButton;

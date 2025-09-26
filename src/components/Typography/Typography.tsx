@@ -1,0 +1,78 @@
+import React, { PropsWithChildren } from 'react';
+
+import classNames from 'classnames';
+import classes from './style.module.scss';
+
+type TextProps = React.HTMLAttributes<HTMLParagraphElement> &
+	React.HTMLAttributes<HTMLHeadingElement> & {
+		variant:
+			| 'displayLarge'
+			| 'headingLarge'
+			| 'headingMedium'
+			| 'headingSmall'
+			| 'bodyLarge'
+			| 'bodyMedium'
+			| 'bodySmall'
+			| 'labelLarge'
+			| 'labelMedium'
+			| 'labelSmall';
+		as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+	};
+
+const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children, className = '', ...props }) => {
+	let Component = as;
+	switch (props.variant) {
+		case 'displayLarge':
+			Component = 'p';
+			className += ' ' + classes.displayLarge;
+			break;
+		case 'headingLarge':
+			Component = 'h1';
+			className += ' ' + classes.headingLarge;
+			break;
+		case 'headingMedium':
+			Component = 'h2';
+			className += ' ' + classes.headingMedium;
+			break;
+		case 'headingSmall':
+			Component = 'h3';
+			className += ' ' + classes.headingSmall;
+			break;
+		case 'bodyLarge':
+			Component = 'p';
+			className += ' ' + classes.bodyLarge;
+			break;
+		case 'bodyMedium':
+			Component = 'p';
+			className += ' ' + classes.bodyMedium;
+			break;
+		case 'bodySmall':
+			Component = 'p';
+			className += ' ' + classes.bodySmall;
+			break;
+		case 'labelLarge':
+			Component = 'span';
+			className += ' ' + classes.labelLarge;
+			break;
+		case 'labelMedium':
+			Component = 'span';
+			className += ' ' + classes.labelMedium;
+			break;
+		case 'labelSmall':
+			Component = 'span';
+			className += ' ' + classes.labelSmall;
+			break;
+		default:
+			Component = as;
+	}
+
+	return (
+		<Component
+			className={classNames(className, classes.commonStyle)}
+			onClick={props.onClick}>
+			{children}
+		</Component>
+	);
+};
+
+export default Typography;

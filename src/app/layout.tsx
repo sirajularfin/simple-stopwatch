@@ -1,12 +1,13 @@
+import classNames from 'classnames';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
+import { montserratFonts, russoOneFonts } from '@/../public/fonts/fonts';
 import '@/common/styles/globals.scss';
 import { APP_LANGUAGES } from '@/common/types/constants';
 import LocalizationProvider from '@/i18n/LocalizationProvider';
-import customFonts from '../../public/fonts/fonts';
 
 export const metadata: Metadata = {
 	title: 'Stopwatch App',
@@ -26,7 +27,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang={locale}>
-			<body className={customFonts.className}>
+			<body className={classNames(russoOneFonts.variable, montserratFonts.variable)}>
 				<LocalizationProvider initialLocale={initialLocale}>
 					<NextIntlClientProvider locale={locale}>
 						<main>{children}</main>

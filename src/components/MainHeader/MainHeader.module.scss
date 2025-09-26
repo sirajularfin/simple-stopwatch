@@ -1,0 +1,12 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: convertPxToRem(15) 0;
+  margin: 0 auto;
+  max-width: $default-max-width;
+
+  @include media-query(lg) {
+    padding: convertPxToRem(15) convertPxToRem(20);
+  }
+}

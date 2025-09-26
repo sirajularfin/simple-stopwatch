@@ -1,4 +1,5 @@
 .container {
+	width: convertPxToRem(250);
 	border-radius: convertPxToRem(20);
 	border: convertPxToRem(30) solid $color-black;
 }
@@ -9,8 +10,7 @@
 }
 
 .tick {
-	letter-spacing: convertPxToRem(10);
 	color: $color-white;
-	font-size: convertPxToRem(160);
-	padding: convertPxToRem(124) convertPxToRem(20);
+	padding: convertPxToRem(50) 0;
+	text-align: center;
 }

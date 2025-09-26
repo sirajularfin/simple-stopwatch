@@ -1,0 +1,66 @@
+.displayLarge {
+	font-family: $font-russo-one;
+	font-size: convertPxToRem(128);
+	line-height: 1.5;
+	letter-spacing: convertPxToRem(10);
+	font-weight: bold;
+}
+
+.headingLarge {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(24);
+	font-weight: bold;
+}
+
+.headingMedium {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(20);
+	font-weight: semi-bold;
+}
+
+.headingSmall {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(16);
+	font-weight: normal;
+}
+
+.labelLarge {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(14);
+	font-weight: bold;
+}
+
+.labelMedium {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(12);
+	font-weight: normal;
+}
+
+.labelSmall {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(10);
+	font-weight: normal;
+}
+
+.bodyLarge {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(16);
+	font-weight: normal;
+}
+
+.bodyMedium {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(14);
+	font-weight: normal;
+}
+
+.bodySmall {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(12);
+	font-weight: normal;
+}
+
+.commonStyle {
+	margin: 0;
+	padding: 0;
+}
