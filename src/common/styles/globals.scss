@@ -5,6 +5,7 @@ body{
 }
 
 main {
-	min-height: 100vh;
 	max-width: $default-max-width;
+	margin: 0 auto;
+	min-height: calc(100vh - convertPxToRem(57));
 }

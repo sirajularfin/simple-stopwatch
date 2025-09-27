@@ -1,6 +1,8 @@
 {
 	"button_play": "Play",
-	"navItems_stopwatch": "Stopwatch",
-	"navItems_timer": "Timer",
-	"navItems_about": "About"
+	"headerItems_stopwatch": "Stopwatch",
+	"headerItems_timer": "Timer",
+	"headerItems_about": "About",
+	"savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
+	"savePreset_button": "Save Preset"
 }

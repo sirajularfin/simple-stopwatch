@@ -10,9 +10,9 @@ const MainHeader: React.FC = async () => {
 	return (
 		<header className={classes.container}>
 			<ul>
-				<Typography variant='listItem'>{t('navItems_stopwatch')}</Typography>
-				<Typography variant='listItem'>{t('navItems_timer')}</Typography>
-				<Typography variant='listItem'>{t('navItems_about')}</Typography>
+				<Typography variant='listItem'>{t('headerItems_stopwatch')}</Typography>
+				<Typography variant='listItem'>{t('headerItems_timer')}</Typography>
+				<Typography variant='listItem'>{t('headerItems_about')}</Typography>
 			</ul>
 		</header>
 	);
