@@ -14,7 +14,7 @@ interface IProps {
 	resetTimer?: boolean;
 }
 
-const TimeTick: React.FC<IProps> = ({ count, mode, isRunning = false, resetTimer = false }) => {
+const DisplayTimer: React.FC<IProps> = ({ count, mode, isRunning = false, resetTimer = false }) => {
 	const [timer, setTimer] = React.useState<number>(count ?? 0);
 
 	React.useEffect(() => {
@@ -29,11 +29,11 @@ const TimeTick: React.FC<IProps> = ({ count, mode, isRunning = false, resetTimer
 				setTimer(0);
 				break;
 		}
-		const interval = setInterval(() => {
-			setTimer((prev) => prev + 1);
-		}, 1000);
+		// const interval = setInterval(() => {
+		// 	setTimer((prev) => prev + 1);
+		// }, 1000);
 
-		return () => clearInterval(interval);
+		// return () => clearInterval(interval);
 	}, []);
 
 	return (
@@ -45,8 +45,22 @@ const TimeTick: React.FC<IProps> = ({ count, mode, isRunning = false, resetTimer
 					{formatTimeTicks(timer)}
 				</Typography>
 			</div>
+			<div className={classes.tickWrapper}>
+				<Typography
+					className={classes.tick}
+					variant='displayLarge'>
+					{formatTimeTicks(timer)}
+				</Typography>
+			</div>
+			<div className={classes.tickWrapper}>
+				<Typography
+					className={classes.tick}
+					variant='displayLarge'>
+					{formatTimeTicks(timer)}
+				</Typography>
+			</div>
 		</div>
 	);
 };
 
-export default TimeTick;
+export default DisplayTimer;

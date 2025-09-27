@@ -4,6 +4,8 @@ import React, { PropsWithChildren } from 'react';
 import classes from './style.module.scss';
 
 type TextProps = React.HTMLAttributes<HTMLParagraphElement> &
+	React.HTMLAttributes<HTMLDataListElement> &
+	React.HTMLAttributes<HTMLSpanElement> &
 	React.HTMLAttributes<HTMLHeadingElement> & {
 		variant:
 			| 'displayLarge'
@@ -15,8 +17,9 @@ type TextProps = React.HTMLAttributes<HTMLParagraphElement> &
 			| 'bodySmall'
 			| 'labelLarge'
 			| 'labelMedium'
-			| 'labelSmall';
-		as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+			| 'labelSmall'
+			| 'listItem';
+		as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'li';
 	};
 
 const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children, className = '', ...props }) => {
@@ -61,6 +64,10 @@ const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children
 		case 'labelSmall':
 			Component = 'span';
 			className += ' ' + classes.labelSmall;
+			break;
+		case 'listItem':
+			Component = 'li';
+			className += ' ' + classes.listItem;
 			break;
 		default:
 			Component = as;

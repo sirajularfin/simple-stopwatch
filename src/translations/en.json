@@ -1,3 +1,6 @@
 {
-	"button_play": "Play"
+	"button_play": "Play",
+	"navItems_stopwatch": "Stopwatch",
+	"navItems_timer": "Timer",
+	"navItems_about": "About"
 }

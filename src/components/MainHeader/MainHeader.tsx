@@ -1,16 +1,21 @@
+import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
-import { Logo } from '@/assets';
-import LanguageButton from '../LanguageButton/LanguageButton';
-import classes from './MainHeader.module.scss';
+import Typography from '../Typography/Typography';
+import classes from './style.module.scss';
 
-function MainHeader(): React.ReactElement {
-  return (
-    <header className={classes.container}>
-      <Logo />
-      <LanguageButton />
-    </header>
-  );
-}
+const MainHeader: React.FC = async () => {
+	const t = await getTranslations();
+
+	return (
+		<header className={classes.container}>
+			<ul>
+				<Typography variant='listItem'>{t('navItems_stopwatch')}</Typography>
+				<Typography variant='listItem'>{t('navItems_timer')}</Typography>
+				<Typography variant='listItem'>{t('navItems_about')}</Typography>
+			</ul>
+		</header>
+	);
+};
 
 export default MainHeader;

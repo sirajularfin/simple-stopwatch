@@ -5,8 +5,8 @@ interface IProps {
 	isPlaying?: boolean;
 }
 
-const PlayButton: React.FC<IProps> = ({ isPlaying }) => {
+const ActionButton: React.FC<IProps> = ({ isPlaying }) => {
 	return <button className={classes.container}>{isPlaying ? <PauseIcon /> : <ResumeIcon />}</button>;
 };
 
-export default PlayButton;
+export default ActionButton;

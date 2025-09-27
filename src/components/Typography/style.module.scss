@@ -59,6 +59,12 @@
 	font-weight: 400;
 }
 
+.listItem {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(16);
+	font-weight: 400;
+}
+
 .commonStyle {
 	margin: 0;
 	padding: 0;

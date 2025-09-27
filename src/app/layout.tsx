@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 import { montserratFonts, russoOneFonts } from '@/../public/fonts/fonts';
 import '@/common/styles/globals.scss';
 import { APP_LANGUAGES } from '@/common/types/constants';
+import MainHeader from '@/components/MainHeader/MainHeader';
 import LocalizationProvider from '@/i18n/LocalizationProvider';
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default async function RootLayout({
 			<body className={classNames(russoOneFonts.variable, montserratFonts.variable)}>
 				<LocalizationProvider initialLocale={initialLocale}>
 					<NextIntlClientProvider locale={locale}>
+						<MainHeader />
 						<main>{children}</main>
 					</NextIntlClientProvider>
 				</LocalizationProvider>
