@@ -4,6 +4,7 @@ import { APPLICATION_MODES } from '@/common/types/constants';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
 import TextInput from '@/components/TextInput/TextInput';
+import Typography from '@/components/Typography/Typography';
 import classes from './style.module.scss';
 
 export default async function Home() {
@@ -21,6 +22,7 @@ export default async function Home() {
 				</div>
 				<ActionButton isPlaying={false} />
 			</div>
+			<Typography variant='bodySmall'>{t('shortcut_tips')}</Typography>
 		</div>
 	);
 }

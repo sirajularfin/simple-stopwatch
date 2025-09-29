@@ -4,5 +4,6 @@
 	"headerItems_timer": "Timer",
 	"headerItems_about": "About",
 	"savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
-	"savePreset_button": "Save Preset"
+	"savePreset_button": "Save Preset",
+	"shortcut_tips": "Shortcut keys: Press ␣ Space to pause/resume · Press ⌫ Delete to reset."
 }

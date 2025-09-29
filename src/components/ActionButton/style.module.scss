@@ -1,6 +1,5 @@
 .container {
   align-items: center;
-  background-color: $color-red-500;
   border-radius: convertPxToRem(50);
   border: none;
   cursor: pointer;
@@ -8,4 +7,20 @@
   height: convertPxToRem(100);
   justify-content: center;
   width: convertPxToRem(100);
+}
+
+.resumeBtn {
+  background-color: $color-green-500;
+}
+
+.pauseBtn {
+  background-color: $color-red-500;
+}
+
+.stopBtn {
+
+}
+
+.deleteBtn {
+
 }
