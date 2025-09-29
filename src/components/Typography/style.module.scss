@@ -1,0 +1,71 @@
+.displayLarge {
+	font-family: $font-russo-one;
+	font-size: convertPxToRem(128);
+	line-height: 1.5;
+	letter-spacing: convertPxToRem(10);
+}
+
+.headingLarge {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(24);
+	font-weight: 600;
+}
+
+.headingMedium {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(20);
+	font-weight: 600;
+}
+
+.headingSmall {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(16);
+	font-weight: 400;
+}
+
+.labelLarge {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(14);
+	font-weight: 600;
+}
+
+.labelMedium {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(12);
+	font-weight: 400;
+}
+
+.labelSmall {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(10);
+	font-weight: 400;
+}
+
+.bodyLarge {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(16);
+	font-weight: 400;
+}
+
+.bodyMedium {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(14);
+	font-weight: 400;
+}
+
+.bodySmall {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(12);
+	font-weight: 400;
+}
+
+.listItem {
+	font-family: $font-montserrat;
+	font-size: convertPxToRem(16);
+	font-weight: 400;
+}
+
+.commonStyle {
+	margin: 0;
+	padding: 0;
+}
