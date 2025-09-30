@@ -15,3 +15,8 @@
   gap: convertPxToRem(24);
   align-items: end;
 }
+
+.shortcutTips {
+  font-style: italic;
+  margin-top: convertPxToRem(4) !important;
+}
