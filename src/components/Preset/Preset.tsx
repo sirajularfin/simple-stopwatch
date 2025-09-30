@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getTranslations } from 'next-intl/server';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
@@ -9,12 +10,19 @@ interface IProps {
 	timestamp: string;
 }
 
-const Preset: React.FC<IProps> = ({ title, timestamp, index }) => {
+const Preset: React.FC<IProps> = async ({ title, timestamp, index }) => {
+	const t = await getTranslations();
+
 	return (
 		<div className={classes.container}>
-			<Typography>{title}</Typography>
-			<p>{timestamp}</p>
-			<span>Preset Number: {index}</span>
+			<Typography variant='headingLarge'>{title}</Typography>
+			<Typography variant='displaySmall'>{timestamp}</Typography>
+			<Typography variant='labelLarge'>
+				{t.rich('preset_label', {
+					span: (children) => <span>{children}</span>,
+					index: index + 1,
+				})}
+			</Typography>
 		</div>
 	);
 };

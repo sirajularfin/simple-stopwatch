@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { APPLICATION_MODES } from '@/common/types/constants';
+import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
 import Preset from '@/components/Preset/Preset';
@@ -26,7 +26,8 @@ export default async function Timer() {
 						mode={APPLICATION_MODES.TIMER}
 					/>
 				</div>
-				<ActionButton isPlaying={false} />
+				<ActionButton type={ACTION_TYPES.PLAY} />
+				<ActionButton type={ACTION_TYPES.STOP} />
 			</div>
 			<Preset
 				title={t('preset_title')}

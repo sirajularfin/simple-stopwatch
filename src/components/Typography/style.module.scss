@@ -5,10 +5,16 @@
 	letter-spacing: convertPxToRem(10);
 }
 
+.displaySmall {
+	font-family: font(russo-one);
+	font-size: convertPxToRem(32);
+	letter-spacing: convertPxToRem(0);
+}
+
 .headingLarge {
 	font-family: font(montserrat);
 	font-size: convertPxToRem(24);
-	font-weight: 600;
+	font-weight: 400;
 }
 
 .headingMedium {
