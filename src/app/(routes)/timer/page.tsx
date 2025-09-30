@@ -4,8 +4,8 @@ import { getTranslations } from 'next-intl/server';
 import { APPLICATION_MODES } from '@/common/types/constants';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
+import Preset from '@/components/Preset/Preset';
 import TextInput from '@/components/TextInput/TextInput';
-import Typography from '@/components/Typography/Typography';
 import classes from './style.module.scss';
 
 export const metadata: Metadata = {
@@ -28,11 +28,11 @@ export default async function Timer() {
 				</div>
 				<ActionButton isPlaying={false} />
 			</div>
-			<Typography
-				variant='bodySmall'
-				className={classes.shortcutTips}>
-				{t('shortcut_tips')}
-			</Typography>
+			<Preset
+				title={t('preset_title')}
+				timestamp={t('preset_timestamp')}
+				index={1}
+			/>
 		</div>
 	);
 }
