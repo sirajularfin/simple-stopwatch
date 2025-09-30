@@ -13,23 +13,23 @@ const ActionButton: React.FC<IProps> = ({ type }) => {
 	switch (type) {
 		case ACTION_TYPES.PAUSE:
 			icon = <PauseIcon />;
-			actionBtn = classes.pause;
+			actionBtn = classes.pauseBtn;
 			break;
 		case ACTION_TYPES.PLAY:
 			icon = <ResumeIcon />;
-			actionBtn = classes.play;
+			actionBtn = classes.playBtn;
 			break;
 		case ACTION_TYPES.EDIT:
 			icon = <EditIcon />;
-			actionBtn = classes.edit;
+			actionBtn = classes.editBtn;
 			break;
 		case ACTION_TYPES.DELETE:
 			icon = <DeleteIcon />;
-			actionBtn = classes.delete;
+			actionBtn = classes.deleteBtn;
 			break;
 		case ACTION_TYPES.STOP:
 			icon = <StopIcon />;
-			actionBtn = classes.stop;
+			actionBtn = classes.stopBtn;
 			break;
 		default:
 			break;

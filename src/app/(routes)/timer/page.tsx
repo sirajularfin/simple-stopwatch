@@ -26,8 +26,10 @@ export default async function Timer() {
 						mode={APPLICATION_MODES.TIMER}
 					/>
 				</div>
-				<ActionButton type={ACTION_TYPES.PLAY} />
-				<ActionButton type={ACTION_TYPES.STOP} />
+				<div className={classes.actionButtons}>
+					<ActionButton type={ACTION_TYPES.PLAY} />
+					<ActionButton type={ACTION_TYPES.STOP} />
+				</div>
 			</div>
 			<Preset
 				title={t('preset_title')}

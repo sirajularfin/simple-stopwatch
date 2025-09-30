@@ -1,26 +1,30 @@
 .container {
-  align-items: center;
-  border-radius: convertPxToRem(50);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  height: convertPxToRem(100);
-  justify-content: center;
-  width: convertPxToRem(100);
-}
-
-.resumeBtn {
-  background-color: color(green-500);
+	align-items: center;
+	border-radius: convertPxToRem(50);
+	border: none;
+	cursor: pointer;
+	display: flex;
+	height: convertPxToRem(100);
+	justify-content: center;
+	width: convertPxToRem(100);
 }
 
 .pauseBtn {
-  background-color: color(red-500);
+	background-color: color(amber-500);
 }
 
-.stopBtn {
+.playBtn {
+	background-color: color(green-500);
+}
 
+.editBtn {
+	background-color: color(blue-grey-400);
 }
 
 .deleteBtn {
+	background-color: color(red-500);
+}
 
+.stopBtn {
+	background-color: color(red-500);
 }

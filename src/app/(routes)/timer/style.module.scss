@@ -15,3 +15,9 @@
   gap: convertPxToRem(24);
   align-items: end;
 }
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: convertPxToRem(20);
+}
