@@ -1,30 +1,45 @@
 .container {
-	align-items: center;
 	border-radius: convertPxToRem(50);
 	border: none;
 	cursor: pointer;
-	display: flex;
+	line-height: 0;
+	& svg {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.LARGE_SIZE {
 	height: convertPxToRem(100);
-	justify-content: center;
 	width: convertPxToRem(100);
 }
 
-.pauseBtn {
+.MEDIUM_SIZE {
+	height: convertPxToRem(60);
+	width: convertPxToRem(60);
+}
+
+.SMALL_SIZE {
+	height: convertPxToRem(40);
+	width: convertPxToRem(40);
+}
+
+.PAUSE_BUTTON {
 	background-color: color(amber-500);
 }
 
-.playBtn {
+.PLAY_BUTTON {
 	background-color: color(green-500);
 }
 
-.editBtn {
+.EDIT_BUTTON {
 	background-color: color(blue-grey-400);
 }
 
-.deleteBtn {
+.DELETE_BUTTON {
 	background-color: color(red-500);
 }
 
-.stopBtn {
+.STOP_BUTTON {
 	background-color: color(red-500);
 }

@@ -21,9 +21,16 @@ type TextProps = React.HTMLAttributes<HTMLParagraphElement> &
 			| 'labelSmall'
 			| 'listItem';
 		as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'li';
+		align?: 'left' | 'center' | 'right' | 'justify';
 	};
 
-const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children, className = '', ...props }) => {
+const Typography: React.FC<PropsWithChildren<TextProps>> = ({
+	as = 'p',
+	children,
+	className = '',
+	align,
+	...props
+}) => {
 	let Component = as;
 	switch (props.variant) {
 		case 'displayLarge':
@@ -59,15 +66,15 @@ const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children
 			className += ' ' + classes.bodySmall;
 			break;
 		case 'labelLarge':
-			Component = 'span';
+			Component = 'p';
 			className += ' ' + classes.labelLarge;
 			break;
 		case 'labelMedium':
-			Component = 'span';
+			Component = 'p';
 			className += ' ' + classes.labelMedium;
 			break;
 		case 'labelSmall':
-			Component = 'span';
+			Component = 'p';
 			className += ' ' + classes.labelSmall;
 			break;
 		case 'listItem':
@@ -81,7 +88,8 @@ const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children
 	return (
 		<Component
 			className={classNames(className, classes.commonStyle)}
-			onClick={props.onClick}>
+			onClick={props.onClick}
+			style={{ textAlign: align }}>
 			{children}
 		</Component>
 	);

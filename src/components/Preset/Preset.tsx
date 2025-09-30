@@ -1,6 +1,8 @@
 import React from 'react';
 
+import { ACTION_TYPES } from '@/common/types/constants';
 import { getTranslations } from 'next-intl/server';
+import ActionButton from '../ActionButton/ActionButton';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
@@ -15,9 +17,34 @@ const Preset: React.FC<IProps> = async ({ title, timestamp, index }) => {
 
 	return (
 		<div className={classes.container}>
-			<Typography variant='headingLarge'>{title}</Typography>
-			<Typography variant='displaySmall'>{timestamp}</Typography>
-			<Typography variant='labelLarge'>
+			<Typography
+				variant='headingLarge'
+				className={classes.text}>
+				{title}
+			</Typography>
+			<Typography
+				variant='displaySmall'
+				className={classes.text}>
+				{timestamp}
+			</Typography>
+			<div className={classes.actionButtons}>
+				<ActionButton
+					type={ACTION_TYPES.PLAY}
+					size='SMALL'
+				/>
+				<ActionButton
+					type={ACTION_TYPES.EDIT}
+					size='SMALL'
+				/>
+				<ActionButton
+					type={ACTION_TYPES.DELETE}
+					size='SMALL'
+				/>
+			</div>
+			<Typography
+				variant='labelLarge'
+				align='center'
+				className={classes.text}>
 				{t.rich('preset_label', {
 					span: (children) => <span>{children}</span>,
 					index: index + 1,
