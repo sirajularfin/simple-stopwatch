@@ -9,6 +9,15 @@ export enum APPLICATION_MODES {
 	TIMER = 'TIMER',
 }
 
+export enum ACTION_TYPES {
+	DELETE = 'DELETE',
+	EDIT = 'EDIT',
+	PAUSE = 'PAUSE',
+	PLAY = 'PLAY',
+	RESET = 'RESET',
+	STOP = 'STOP',
+}
+
 export enum TIMER_PRESETS {
 	ONE_MINUTE = 60,
 	FIVE_MINUTES = 300,
@@ -26,10 +35,3 @@ export const TIMER_PRESET_OPTIONS = [
 	{ label: '30 Minutes', value: TIMER_PRESETS.THIRTY_MINUTES },
 	{ label: '60 Minutes', value: TIMER_PRESETS.SIXTY_MINUTES },
 ];
-
-export enum TIMER_MODES {
-	RUNNING = 'RUNNING',
-	PAUSED = 'PAUSED',
-	COMPLETED = 'COMPLETED',
-	RESET = 'RESET',
-}

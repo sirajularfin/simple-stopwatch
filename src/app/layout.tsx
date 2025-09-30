@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import classNames from 'classnames';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
@@ -29,6 +30,7 @@ export default async function RootLayout({
 	return (
 		<html lang={locale}>
 			<body className={classNames(russoOneFonts.variable, montserratFonts.variable)}>
+				<Analytics />
 				<LocalizationProvider initialLocale={initialLocale}>
 					<NextIntlClientProvider locale={locale}>
 						<MainHeader />

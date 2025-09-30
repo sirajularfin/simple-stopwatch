@@ -9,6 +9,7 @@ type TextProps = React.HTMLAttributes<HTMLParagraphElement> &
 	React.HTMLAttributes<HTMLHeadingElement> & {
 		variant:
 			| 'displayLarge'
+			| 'displaySmall'
 			| 'headingLarge'
 			| 'headingMedium'
 			| 'headingSmall'
@@ -28,6 +29,10 @@ const Typography: React.FC<PropsWithChildren<TextProps>> = ({ as = 'p', children
 		case 'displayLarge':
 			Component = 'p';
 			className += ' ' + classes.displayLarge;
+			break;
+		case 'displaySmall':
+			Component = 'p';
+			className += ' ' + classes.displaySmall;
 			break;
 		case 'headingLarge':
 			Component = 'h1';
