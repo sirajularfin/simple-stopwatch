@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
+import Preset from '@/components/Preset/Preset';
 import TextInput from '@/components/TextInput/TextInput';
 import classes from './style.module.scss';
 
@@ -26,15 +27,21 @@ export default async function Timer() {
 					/>
 				</div>
 				<div className={classes.actionButtons}>
-					<ActionButton type={ACTION_TYPES.PLAY} />
-					<ActionButton type={ACTION_TYPES.STOP} />
+					<ActionButton
+						type={ACTION_TYPES.PLAY}
+						size='LARGE'
+					/>
+					<ActionButton
+						type={ACTION_TYPES.STOP}
+						size='LARGE'
+					/>
 				</div>
 			</div>
-			{/* <Preset
-				title={t('preset_title')}
-				timestamp={t('preset_timestamp')}
+			<Preset
+				title={'Study Time'}
+				timestamp='25:00'
 				index={1}
-			/> */}
+			/>
 		</div>
 	);
 }

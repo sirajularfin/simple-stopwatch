@@ -1,5 +1,17 @@
 .container {
 	background-color: color(blue-grey-500);
 	border-radius: convertPxToRem(20);
-	padding: convertPxToRem(12) convertPxToRem(16);
+	width: convertPxToRem(180);
+	max-height: convertPxToRem(180);
+	padding: convertPxToRem(18) convertPxToRem(20);
+	& .text {
+		color: color(white);
+	}
+}
+
+.actionButtons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: convertPxToRem(40);
+	margin-bottom: convertPxToRem(20);
 }

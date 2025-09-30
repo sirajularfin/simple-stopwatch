@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { getTranslations } from 'next-intl/server';
+import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -8,7 +10,9 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	helperText?: string;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ error, helperText, ...props }) => {
+const TextInput: React.FC<TextInputProps> = async ({ error, helperText, ...props }) => {
+	const t = await getTranslations();
+
 	return (
 		<div
 			className={classNames(classes.inputWrapper, {
@@ -18,6 +22,11 @@ const TextInput: React.FC<TextInputProps> = ({ error, helperText, ...props }) =>
 				className={classes.textInput}
 				{...props}
 			/>
+			<Typography
+				variant='labelLarge'
+				className={classes.saveBtn}>
+				{t('savePreset_button')}
+			</Typography>
 		</div>
 	);
 };
