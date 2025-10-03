@@ -22,3 +22,11 @@
   flex-direction: column;
   gap: convertPxToRem(20);
 }
+
+.presets {
+  display: flex;
+  gap: convertPxToRem(80);
+  background: linear-gradient(0deg,rgba(227, 242, 253, 1) 60%, rgba(255, 255, 255, 1) 100%);
+  padding: convertPxToRem(100) 0;
+  width: 100%;
+}
