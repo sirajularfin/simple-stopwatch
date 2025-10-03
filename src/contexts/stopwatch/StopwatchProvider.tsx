@@ -1,18 +1,9 @@
 'use client';
 
 import React, { createContext, PropsWithChildren, useCallback, useContext, useRef, useState } from 'react';
-
 import { IStopwatchContextProps } from './types';
 
 const StopwatchContext = createContext<IStopwatchContextProps | undefined>(undefined);
-
-export const useStopwatch = () => {
-	const context = useContext(StopwatchContext);
-	if (!context) {
-		throw new Error('useStopwatch must be used within a StopwatchProvider');
-	}
-	return context;
-};
 
 export const StopwatchProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const [time, setTime] = useState(0);
@@ -58,4 +49,12 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({ children }) => 
 			{children}
 		</StopwatchContext.Provider>
 	);
+};
+
+export const useStopwatch = () => {
+	const context = useContext(StopwatchContext);
+	if (!context) {
+		throw new Error('useStopwatch must be used within a StopwatchProvider');
+	}
+	return context;
 };
