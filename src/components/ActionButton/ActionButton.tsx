@@ -6,7 +6,7 @@ import classes from './style.module.scss';
 
 interface IProps {
 	type: ACTION_TYPES;
-	size?: 'SMALL' | 'MEDIUM' | 'LARGE';
+	size?: 'MEDIUM' | 'LARGE';
 }
 
 const ActionButton: React.FC<IProps> = ({ type, size = 'MEDIUM' }) => {

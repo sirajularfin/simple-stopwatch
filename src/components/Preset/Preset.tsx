@@ -30,15 +30,15 @@ const Preset: React.FC<IProps> = async ({ title, timestamp, index }) => {
 			<div className={classes.actionButtons}>
 				<ActionButton
 					type={ACTION_TYPES.PLAY}
-					size='SMALL'
+					size='MEDIUM'
 				/>
 				<ActionButton
 					type={ACTION_TYPES.EDIT}
-					size='SMALL'
+					size='MEDIUM'
 				/>
 				<ActionButton
 					type={ACTION_TYPES.DELETE}
-					size='SMALL'
+					size='MEDIUM'
 				/>
 			</div>
 			<Typography

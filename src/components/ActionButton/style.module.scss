@@ -10,16 +10,11 @@
 }
 
 .LARGE_SIZE {
-	height: convertPxToRem(100);
-	width: convertPxToRem(100);
+	height: convertPxToRem(80);
+	width: convertPxToRem(80);
 }
 
 .MEDIUM_SIZE {
-	height: convertPxToRem(60);
-	width: convertPxToRem(60);
-}
-
-.SMALL_SIZE {
 	height: convertPxToRem(40);
 	width: convertPxToRem(40);
 }
