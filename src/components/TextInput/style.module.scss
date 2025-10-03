@@ -2,8 +2,8 @@
 	display: flex;
 	gap: convertPxToRem(10);
 	background: color(grey-200);
-	border-top-left-radius: convertPxToRem(20);
-	border-top-right-radius: convertPxToRem(20);
+	border-bottom-left-radius: convertPxToRem(20);
+	border-bottom-right-radius: convertPxToRem(20);
 	padding: convertPxToRem(20);
 }
 
