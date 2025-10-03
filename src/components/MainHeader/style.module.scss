@@ -1,27 +1,27 @@
 .container {
-	display: flex;
-	justify-content: center;
-	padding: convertPxToRem(20) 0;
-	background-color: color(blue-900);
+  display: flex;
+  justify-content: center;
+  padding: convertPxToRem(20) 0;
+  background-color: color(blue-900);
 
-	ul {
-		flex: 1;
-		display: flex;
-		gap: convertPxToRem(30);
-		max-width: $default-max-width;
-		margin: 0 !important;
-		padding: 0 !important;
-	}
+  ul {
+    flex: 1;
+    display: flex;
+    gap: convertPxToRem(30);
+    max-width: $default-max-width;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-	li {
-		color: color(grey-50);
-		font-size: convertPxToRem(14);
-		font-weight: 300;
-		list-style: none;
-		text-transform: uppercase;
-	}
+  li {
+    color: color(grey-50);
+    font-size: convertPxToRem(14);
+    font-weight: 300;
+    list-style: none;
+    text-transform: uppercase;
+  }
 
-	@include media-query(lg) {
-		padding: convertPxToRem(15) convertPxToRem(20);
-	}
+  @include media-query(lg) {
+    padding: convertPxToRem(15) convertPxToRem(20);
+  }
 }

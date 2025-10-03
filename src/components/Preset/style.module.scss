@@ -1,17 +1,17 @@
 .container {
-	background-color: color(blue-grey-500);
-	border-radius: convertPxToRem(20);
-	width: convertPxToRem(180);
-	max-height: convertPxToRem(180);
-	padding: convertPxToRem(18) convertPxToRem(20);
-	& .text {
-		color: color(white);
-	}
+  background-color: color(blue-grey-500);
+  border-radius: convertPxToRem(20);
+  width: convertPxToRem(180);
+  max-height: convertPxToRem(180);
+  padding: convertPxToRem(18) convertPxToRem(20);
+  & .text {
+    color: color(white);
+  }
 }
 
 .actionButtons {
-	display: flex;
-	justify-content: space-around;
-	margin-top: convertPxToRem(40);
-	margin-bottom: convertPxToRem(20);
+  display: flex;
+  justify-content: space-around;
+  margin-top: convertPxToRem(40);
+  margin-bottom: convertPxToRem(20);
 }

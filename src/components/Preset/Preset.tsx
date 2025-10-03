@@ -7,51 +7,35 @@ import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
 interface IProps {
-	index: number;
-	title: string;
-	timestamp: string;
+  index: number;
+  title: string;
+  timestamp: string;
 }
 
 const Preset: React.FC<IProps> = async ({ title, timestamp, index }) => {
-	const t = await getTranslations();
+  const t = await getTranslations();
 
-	return (
-		<div className={classes.container}>
-			<Typography
-				variant='headingLarge'
-				className={classes.text}>
-				{title}
-			</Typography>
-			<Typography
-				variant='displaySmall'
-				className={classes.text}>
-				{timestamp}
-			</Typography>
-			<div className={classes.actionButtons}>
-				<ActionButton
-					type={ACTION_TYPES.PLAY}
-					size='MEDIUM'
-				/>
-				<ActionButton
-					type={ACTION_TYPES.EDIT}
-					size='MEDIUM'
-				/>
-				<ActionButton
-					type={ACTION_TYPES.DELETE}
-					size='MEDIUM'
-				/>
-			</div>
-			<Typography
-				variant='labelLarge'
-				align='center'
-				className={classes.text}>
-				{t.rich('preset_label', {
-					span: (children) => <span>{children}</span>,
-					index: index + 1,
-				})}
-			</Typography>
-		</div>
-	);
+  return (
+    <div className={classes.container}>
+      <Typography variant="headingLarge" className={classes.text}>
+        {title}
+      </Typography>
+      <Typography variant="displaySmall" className={classes.text}>
+        {timestamp}
+      </Typography>
+      <div className={classes.actionButtons}>
+        <ActionButton type={ACTION_TYPES.PLAY} size="MEDIUM" />
+        <ActionButton type={ACTION_TYPES.EDIT} size="MEDIUM" />
+        <ActionButton type={ACTION_TYPES.DELETE} size="MEDIUM" />
+      </div>
+      <Typography variant="labelLarge" align="center" className={classes.text}>
+        {t.rich('preset_label', {
+          span: children => <span>{children}</span>,
+          index: index + 1,
+        })}
+      </Typography>
+    </div>
+  );
 };
 
 export default Preset;

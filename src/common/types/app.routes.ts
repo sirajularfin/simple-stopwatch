@@ -1,4 +1,4 @@
 export enum APP_ROUTES {
-	TIMER = '/timer',
-	STOPWATCH = '/stopwatch',
+  TIMER = '/timer',
+  STOPWATCH = '/stopwatch',
 }

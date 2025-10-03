@@ -8,15 +8,15 @@
 
 // Function to get colors
 @function color($key) {
-	@return map-get($colors, $key);
+  @return map-get($colors, $key);
 }
 
 // Function to get fonts
 @function font($key) {
-	@return map-get($font-families, $key);
+  @return map-get($font-families, $key);
 }
 
 // Function to get breakpoints
 @function breakpoint($key) {
-	@return map-get($breakpoints, $key);
+  @return map-get($breakpoints, $key);
 }

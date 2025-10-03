@@ -9,39 +9,29 @@ import TextInput from '@/components/TextInput/TextInput';
 import classes from './style.module.scss';
 
 export const metadata: Metadata = {
-	title: 'Timer - Stopwatch App',
-	description: 'A simple timer application built with Next.js',
+  title: 'Timer - Stopwatch App',
+  description: 'A simple timer application built with Next.js',
 };
 
 export default async function Timer() {
-	const t = await getTranslations();
+  const t = await getTranslations();
 
-	return (
-		<div className={classes.container}>
-			<div className={classes.wrapper}>
-				<div className={classes.timerPreset}>
-					<TextInput placeholder={t('savePreset_placeholder')} />
-					<DisplayTimer
-						count={5}
-						mode={APPLICATION_MODES.TIMER}
-					/>
-				</div>
-				<div className={classes.actionButtons}>
-					<ActionButton
-						type={ACTION_TYPES.PLAY}
-						size='LARGE'
-					/>
-					<ActionButton
-						type={ACTION_TYPES.STOP}
-						size='LARGE'
-					/>
-				</div>
-			</div>
-			<Preset
-				title={'Study Time'}
-				timestamp='25:00'
-				index={1}
-			/>
-		</div>
-	);
+  return (
+    <div className={classes.container}>
+      <div className={classes.wrapper}>
+        <div className={classes.timerPreset}>
+          <DisplayTimer count={5} mode={APPLICATION_MODES.TIMER} />
+          <TextInput placeholder={t('savePreset_placeholder')} />
+        </div>
+        <div className={classes.actionButtons}>
+          <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
+          <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
+        </div>
+      </div>
+      <div className={classes.presets}>
+        <Preset title={'Study Time'} timestamp="25:00" index={1} />
+        <Preset title={'Study Time'} timestamp="25:00" index={1} />
+      </div>
+    </div>
+  );
 }

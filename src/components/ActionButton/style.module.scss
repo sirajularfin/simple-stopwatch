@@ -1,40 +1,40 @@
 .container {
-	border-radius: convertPxToRem(50);
-	border: none;
-	cursor: pointer;
-	line-height: 0;
-	& svg {
-		width: 100%;
-		height: 100%;
-	}
+  border-radius: convertPxToRem(50);
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .LARGE_SIZE {
-	height: convertPxToRem(80);
-	width: convertPxToRem(80);
+  height: convertPxToRem(80);
+  width: convertPxToRem(80);
 }
 
 .MEDIUM_SIZE {
-	height: convertPxToRem(40);
-	width: convertPxToRem(40);
+  height: convertPxToRem(40);
+  width: convertPxToRem(40);
 }
 
 .PAUSE_BUTTON {
-	background-color: color(amber-500);
+  background-color: color(amber-500);
 }
 
 .PLAY_BUTTON {
-	background-color: color(green-500);
+  background-color: color(green-500);
 }
 
 .EDIT_BUTTON {
-	background-color: color(blue-grey-400);
+  background-color: color(blue-grey-400);
 }
 
 .DELETE_BUTTON {
-	background-color: color(red-500);
+  background-color: color(red-500);
 }
 
 .STOP_BUTTON {
-	background-color: color(red-500);
+  background-color: color(red-500);
 }
