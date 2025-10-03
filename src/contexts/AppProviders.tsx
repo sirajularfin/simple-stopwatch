@@ -5,6 +5,7 @@ import React from 'react';
 
 import { APP_LANGUAGES } from '@/common/types/constants';
 import LocalizationProvider from '@/i18n/LocalizationProvider';
+import { StopwatchProvider } from './stopwatch/StopwatchProvider';
 import { TimerProvider } from './timer/TimerProvider';
 
 export const AppProviders: React.FC<React.PropsWithChildren> = async ({ children }) => {
@@ -17,7 +18,9 @@ export const AppProviders: React.FC<React.PropsWithChildren> = async ({ children
 	return (
 		<LocalizationProvider initialLocale={initialLocale}>
 			<NextIntlClientProvider locale={locale}>
-				<TimerProvider>{children}</TimerProvider>
+				<StopwatchProvider>
+					<TimerProvider>{children}</TimerProvider>
+				</StopwatchProvider>
 			</NextIntlClientProvider>
 		</LocalizationProvider>
 	);
