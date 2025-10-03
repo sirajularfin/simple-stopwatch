@@ -12,7 +12,6 @@ const MainHeader: React.FC = async () => {
 			<ul>
 				<Typography variant='listItem'>{t('headerItems_stopwatch')}</Typography>
 				<Typography variant='listItem'>{t('headerItems_timer')}</Typography>
-				<Typography variant='listItem'>{t('headerItems_about')}</Typography>
 			</ul>
 		</header>
 	);
