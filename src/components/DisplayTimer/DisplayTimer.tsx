@@ -3,63 +3,92 @@
 import React from 'react';
 
 import { APPLICATION_MODES } from '@/common/types/constants';
-import { formatTimeTicks } from '@/common/utils/string.util';
-import Typography from '../Typography/Typography';
+import logger from '@/common/utils/logger.util';
+import { useTimer } from '@/contexts/timer/TimerProvider';
+import { useEffect } from 'react';
 import classes from './style.module.scss';
 
 interface IProps {
-  count: number;
   mode: APPLICATION_MODES;
-  isRunning?: boolean;
-  resetTimer?: boolean;
 }
 
-const DisplayTimer: React.FC<IProps> = ({
-  count,
-  mode,
-  isRunning = false,
-  resetTimer = false,
-}) => {
-  const [timer, setTimer] = React.useState<number>(count ?? 0);
+const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
+  const { elapsedMs } = useTimer();
 
-  React.useEffect(() => {
-    switch (mode) {
-      case APPLICATION_MODES.STOPWATCH:
-        setTimer(0);
-        break;
-      case APPLICATION_MODES.TIMER:
-        setTimer(count ?? 0);
-        break;
-      default:
-        setTimer(0);
-        break;
-    }
-    // const interval = setInterval(() => {
-    // 	setTimer((prev) => prev + 1);
-    // }, 1000);
+  useEffect(() => {
+    const hourTick = document.getElementById('hourTick');
+    const minuteTick = document.getElementById('minuteTick');
+    const secondTick = document.getElementById('secondTick');
 
-    // return () => clearInterval(interval);
+    const handleHourClick = () => {
+      hourTick?.setAttribute('contentEditable', 'true');
+      hourTick?.focus();
+    };
+    const handleHourBlur = () => {
+      hourTick?.setAttribute('contentEditable', 'false');
+      logger(`[HourTick] Content: ${hourTick?.innerText}`);
+    };
+
+    const handleMinuteClick = () => {
+      minuteTick?.setAttribute('contentEditable', 'true');
+      minuteTick?.focus();
+    };
+    const handleMinuteBlur = () => {
+      minuteTick?.setAttribute('contentEditable', 'false');
+      logger(`[MinuteTick] Content: ${minuteTick?.innerText}`);
+    };
+
+    const handleSecondClick = () => {
+      secondTick?.setAttribute('contentEditable', 'true');
+      secondTick?.focus();
+    };
+    const handleSecondBlur = () => {
+      secondTick?.setAttribute('contentEditable', 'false');
+      logger(`[SecondTick] Content: ${secondTick?.innerText}`);
+    };
+
+    hourTick?.addEventListener('click', handleHourClick);
+    hourTick?.addEventListener('blur', handleHourBlur);
+
+    minuteTick?.addEventListener('click', handleMinuteClick);
+    minuteTick?.addEventListener('blur', handleMinuteBlur);
+
+    secondTick?.addEventListener('click', handleSecondClick);
+    secondTick?.addEventListener('blur', handleSecondBlur);
+
+    return () => {
+      hourTick?.removeEventListener('click', handleHourClick);
+      hourTick?.removeEventListener('blur', handleHourBlur);
+
+      minuteTick?.removeEventListener('click', handleMinuteClick);
+      minuteTick?.removeEventListener('blur', handleMinuteBlur);
+
+      secondTick?.removeEventListener('click', handleSecondClick);
+      secondTick?.removeEventListener('blur', handleSecondBlur);
+    };
   }, []);
 
   return (
     <div className={classes.container}>
-      <div className={classes.tickWrapper}>
-        <Typography className={classes.tick} variant="displayLarge">
-          {formatTimeTicks(timer)}
-        </Typography>
-      </div>
-      <div className={classes.tickWrapper}>
-        <Typography className={classes.tick} variant="displayLarge">
-          {formatTimeTicks(timer)}
-        </Typography>
-      </div>
-      <div className={classes.tickWrapper}>
-        <Typography className={classes.tick} variant="displayLarge">
-          {formatTimeTicks(timer)}
-        </Typography>
-      </div>
+      <div
+        className={classes.tickWrapper}
+        id="hourTick"
+        contentEditable="false"
+      ></div>
+      <div
+        className={classes.tickWrapper}
+        id="minuteTick"
+        contentEditable="false"
+      ></div>
+      <div
+        className={classes.tickWrapper}
+        id="secondTick"
+        contentEditable="false"
+      ></div>
     </div>
   );
-};
+});
+
+DisplayTimer.displayName = 'DisplayTimer';
 
 export default DisplayTimer;
