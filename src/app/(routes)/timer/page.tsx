@@ -20,7 +20,7 @@ export default async function Timer() {
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.timerPreset}>
-          <DisplayTimer count={5} mode={APPLICATION_MODES.TIMER} />
+          <DisplayTimer mode={APPLICATION_MODES.TIMER} />
           <TextInput placeholder={t('savePreset_placeholder')} />
         </div>
         <div className={classes.actionButtons}>
