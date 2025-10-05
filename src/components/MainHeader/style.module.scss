@@ -1,11 +1,9 @@
 .container {
-  display: flex;
-  justify-content: center;
   padding: convertPxToRem(20) 0;
   background-color: color(blue-900);
 
   .navigation {
-    flex: 1;
+    margin: 0 auto;
     max-width: $default-max-width;
   }
 
