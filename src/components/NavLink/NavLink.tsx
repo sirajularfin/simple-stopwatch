@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import classes from './style.module.scss';
 
 interface Props {
@@ -14,8 +14,8 @@ interface Props {
 }
 
 export default function NavLink({ href, children, exact = false }: Props) {
-  const activeSegment = useSelectedLayoutSegment();
-  const isActive = activeSegment === href; // e.g., "timer"
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
     <Link
