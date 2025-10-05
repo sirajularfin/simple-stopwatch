@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import React from 'react';
 
 import { APP_ROUTES } from '@/common/types/app.routes';
+import NavLink from '../NavLink/NavLink';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
@@ -20,7 +20,7 @@ const MainHeader: React.FC = async () => {
         <ul className={classes.list}>
           {HEADER_NAVIGATION_LINKS.map(({ href, labelKey }) => (
             <Typography variant="listItem" key={href}>
-              <Link href={href}>{t(labelKey)}</Link>
+              <NavLink href={href}>{t(labelKey)}</NavLink>
             </Typography>
           ))}
         </ul>

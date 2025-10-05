@@ -18,14 +18,6 @@
     list-style: none;
   }
 
-  a {
-    color: color(grey-50);
-    font-size: convertPxToRem(14);
-    font-weight: 400;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
   @include media-query(lg) {
     padding: convertPxToRem(15) convertPxToRem(20);
   }

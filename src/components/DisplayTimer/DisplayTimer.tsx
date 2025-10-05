@@ -1,19 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import z from 'zod';
 
-import { APPLICATION_MODES } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
+import { timeTickSchema } from '@/common/utils/validation.util';
 import { useTimer } from '@/contexts/timer/TimerProvider';
-import { useEffect } from 'react';
 import classes from './style.module.scss';
 
-interface IProps {
-  mode: APPLICATION_MODES;
-}
-
-const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
-  const { elapsedMs } = useTimer();
+const DisplayTimer: React.FC = React.memo(() => {
+  const { hours, minutes, seconds, setElapsedMs } = useTimer();
 
   useEffect(() => {
     const hourTick = document.getElementById('hourTick');
@@ -23,6 +19,11 @@ const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
     const handleHourClick = () => {
       hourTick?.setAttribute('contentEditable', 'true');
       hourTick?.focus();
+      try {
+        timeTickSchema.parse({ hour: hourTick?.innerText });
+      } catch (error) {
+        z.treeifyError(error as z.ZodError);
+      }
     };
     const handleHourBlur = () => {
       hourTick?.setAttribute('contentEditable', 'false');
@@ -32,6 +33,11 @@ const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
     const handleMinuteClick = () => {
       minuteTick?.setAttribute('contentEditable', 'true');
       minuteTick?.focus();
+      try {
+        timeTickSchema.parse({ minute: minuteTick?.innerText });
+      } catch (error) {
+        z.treeifyError(error as z.ZodError);
+      }
     };
     const handleMinuteBlur = () => {
       minuteTick?.setAttribute('contentEditable', 'false');
@@ -41,6 +47,11 @@ const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
     const handleSecondClick = () => {
       secondTick?.setAttribute('contentEditable', 'true');
       secondTick?.focus();
+      try {
+        timeTickSchema.parse({ second: secondTick?.innerText });
+      } catch (error) {
+        z.treeifyError(error as z.ZodError);
+      }
     };
     const handleSecondBlur = () => {
       secondTick?.setAttribute('contentEditable', 'false');
@@ -55,6 +66,13 @@ const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
 
     secondTick?.addEventListener('click', handleSecondClick);
     secondTick?.addEventListener('blur', handleSecondBlur);
+
+    setElapsedMs(
+      (Number(hourTick?.innerText ?? 0) * 3600 +
+        Number(minuteTick?.innerText ?? 0) * 60 +
+        Number(secondTick?.innerText ?? 0)) *
+        1000
+    );
 
     return () => {
       hourTick?.removeEventListener('click', handleHourClick);
@@ -74,17 +92,23 @@ const DisplayTimer: React.FC<IProps> = React.memo(({ mode }) => {
         className={classes.tickWrapper}
         id="hourTick"
         contentEditable="false"
-      ></div>
+      >
+        {hours}
+      </div>
       <div
         className={classes.tickWrapper}
         id="minuteTick"
         contentEditable="false"
-      ></div>
+      >
+        {minutes}
+      </div>
       <div
         className={classes.tickWrapper}
         id="secondTick"
         contentEditable="false"
-      ></div>
+      >
+        {seconds}
+      </div>
     </div>
   );
 });
