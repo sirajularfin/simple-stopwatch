@@ -1,6 +1,8 @@
 export interface ITimerState {
+  hours: number | undefined;
+  minutes: number | undefined;
+  seconds: number | undefined;
   running: boolean;
-  elapsedMs: number;
 }
 
 export interface ITimerContextProps extends ITimerState {
@@ -8,4 +10,5 @@ export interface ITimerContextProps extends ITimerState {
   pause: () => void;
   stop: () => void;
   reset: () => void;
+  setElapsedMs: React.Dispatch<React.SetStateAction<number>>;
 }
