@@ -1,0 +1,8 @@
+# Ignore artifacts:
+.env
+build
+coverage
+dist
+node_modules
+package.json
+yarn.lock

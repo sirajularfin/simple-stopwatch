@@ -1,21 +1,32 @@
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
+import { APP_ROUTES } from '@/common/types/app.routes';
+import NavLink from '../NavLink/NavLink';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
-const MainHeader: React.FC = async () => {
-	const t = await getTranslations();
+const HEADER_NAVIGATION_LINKS = [
+  { href: APP_ROUTES.STOPWATCH, labelKey: 'stopwatch' },
+  { href: APP_ROUTES.TIMER, labelKey: 'timer' },
+];
 
-	return (
-		<header className={classes.container}>
-			<ul>
-				<Typography variant='listItem'>{t('headerItems_stopwatch')}</Typography>
-				<Typography variant='listItem'>{t('headerItems_timer')}</Typography>
-				<Typography variant='listItem'>{t('headerItems_about')}</Typography>
-			</ul>
-		</header>
-	);
+const MainHeader: React.FC = async () => {
+  const t = await getTranslations('header.nav_items');
+
+  return (
+    <header className={classes.container}>
+      <nav className={classes.navigation}>
+        <ul className={classes.list}>
+          {HEADER_NAVIGATION_LINKS.map(({ href, labelKey }) => (
+            <Typography variant="listItem" key={href}>
+              <NavLink href={href}>{t(labelKey)}</NavLink>
+            </Typography>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
 };
 
 export default MainHeader;
