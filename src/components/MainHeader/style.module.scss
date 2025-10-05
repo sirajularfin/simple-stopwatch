@@ -4,20 +4,27 @@
   padding: convertPxToRem(20) 0;
   background-color: color(blue-900);
 
-  ul {
+  .navigation {
     flex: 1;
+    max-width: $default-max-width;
+  }
+
+  ul {
     display: flex;
     gap: convertPxToRem(30);
-    max-width: $default-max-width;
     margin: 0 !important;
     padding: 0 !important;
   }
 
   li {
+    list-style: none;
+  }
+
+  a {
     color: color(grey-50);
     font-size: convertPxToRem(14);
-    font-weight: 300;
-    list-style: none;
+    font-weight: 400;
+    text-decoration: none;
     text-transform: uppercase;
   }
 
