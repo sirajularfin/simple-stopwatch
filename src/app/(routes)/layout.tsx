@@ -1,4 +1,4 @@
-import '@/common/styles/globals.scss';
+import classes from './style.module.scss';
 
 interface IProps {
   timeCounter: React.ReactNode;
@@ -7,9 +7,9 @@ interface IProps {
 
 const MainLayout: React.FC<IProps> = ({ timeCounter, children }) => {
   return (
-    <div>
+    <div className={classes.mainLayout}>
       <section>{timeCounter}</section>
-      <section>{children}</section>
+      <section className={classes.childContainer}>{children}</section>
     </div>
   );
 };

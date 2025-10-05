@@ -5,6 +5,7 @@ import { getLocale } from 'next-intl/server';
 
 import { montserratFonts, russoOneFonts } from '@/../public/fonts/fonts';
 import '@/common/styles/globals.scss';
+import Footer from '@/components/Footer/Footer';
 import MainHeader from '@/components/MainHeader/MainHeader';
 import { AppProviders } from '@/contexts/AppProviders';
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
         <AppProviders>
           <MainHeader />
           <main>{children}</main>
+          <Footer />
         </AppProviders>
       </body>
     </html>
