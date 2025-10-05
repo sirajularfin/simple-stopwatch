@@ -1,32 +1,6 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: convertPxToRem(44);
-}
-
-.timerPreset {
-  display: flex;
-  flex-direction: column;
-}
-
-.wrapper {
-  display: flex;
-  gap: convertPxToRem(24);
-  align-items: end;
-  margin-bottom: convertPxToRem(60);
-}
-
-.actionButtons {
-  display: flex;
-  flex-direction: column;
-  gap: convertPxToRem(20);
-}
-
 .presets {
   display: flex;
   gap: convertPxToRem(80);
-  background: linear-gradient(0deg,rgba(227, 242, 253, 1) 60%, rgba(255, 255, 255, 1) 100%);
-  padding: convertPxToRem(100) 0;
-  width: 100%;
+  margin: 0 auto;
+  max-width: $default-max-width;
 }

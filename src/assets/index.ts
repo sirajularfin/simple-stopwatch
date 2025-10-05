@@ -11,15 +11,15 @@ import SprintIcon from './svg/sprint-icon.svg';
 import StopIcon from './svg/stop-icon.svg';
 
 export {
-	ArrowDownIcon,
-	ArrowUpIcon,
-	DeleteIcon,
-	EditIcon,
-	ErrorIcon,
-	MailIcon,
-	PauseIcon,
-	ResetIcon,
-	ResumeIcon,
-	SprintIcon,
-	StopIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  DeleteIcon,
+  EditIcon,
+  ErrorIcon,
+  MailIcon,
+  PauseIcon,
+  ResetIcon,
+  ResumeIcon,
+  SprintIcon,
+  StopIcon,
 };

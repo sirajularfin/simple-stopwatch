@@ -10,14 +10,15 @@ const resources: Record<APP_LANGUAGES, () => Promise<Record<string, unknown>>> =
   };
 
 export default getRequestConfig(async () => {
-	const cookieStore = await cookies();
-	const lang = (cookieStore.get('locale')?.value as APP_LANGUAGES) || APP_LANGUAGES.EN;
+  const cookieStore = await cookies();
+  const lang =
+    (cookieStore.get('locale')?.value as APP_LANGUAGES) || APP_LANGUAGES.EN;
 
-	const messagesLoader = resources[lang] || resources[APP_LANGUAGES.EN];
-	const messages = await messagesLoader();
+  const messagesLoader = resources[lang] || resources[APP_LANGUAGES.EN];
+  const messages = await messagesLoader();
 
-	return {
-		locale: lang,
-		messages,
-	};
+  return {
+    locale: lang,
+    messages,
+  };
 });

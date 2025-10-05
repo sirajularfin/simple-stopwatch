@@ -1,0 +1,15 @@
+.link {
+  color: color(blue-grey-100);
+  font-size: convertPxToRem(14);
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &.active {
+    color: color(white);
+    font-weight: 500;
+  }
+  &:hover {
+    color: color(grey-100);
+  }
+}
