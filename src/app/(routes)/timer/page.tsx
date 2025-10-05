@@ -4,7 +4,7 @@ import Preset from '@/components/Preset/Preset';
 import classes from './style.module.scss';
 
 export const metadata: Metadata = {
-  title: 'Timer - Stopwatch App',
+  title: 'Focus Timer & Stopwatch | Pomodoro Presets',
   description: 'A simple timer application built with Next.js',
 };
 
