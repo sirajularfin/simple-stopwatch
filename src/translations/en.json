@@ -5,6 +5,9 @@
       "timer": "Timer"
     }
   },
+  "footer": {
+    "text": "© {year} Simple Stopwatch. All rights reserved."
+  },
   "button_play": "Play",
   "savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
   "savePreset_button": "Save Preset",
