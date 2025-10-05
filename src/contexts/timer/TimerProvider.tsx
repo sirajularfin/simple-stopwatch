@@ -1,5 +1,7 @@
 'use client';
 
+import logger from '@/common/utils/logger.util';
+import { msToTime } from '@/common/utils/time.util';
 import React, {
   createContext,
   useCallback,
@@ -17,8 +19,13 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
+  const { hours, minutes, seconds } = msToTime(elapsedMs);
   const raf = useRef<number | null>(null);
   const lastTick = useRef<number | null>(null);
+
+  logger(
+    `[TimerProvider] Render - elapsedMs: ${elapsedMs}, running: ${running}`
+  );
 
   const tick = useCallback((t: number) => {
     if (lastTick.current == null) lastTick.current = t;
@@ -52,14 +59,17 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   const value = useMemo<ITimerContextProps>(
     () => ({
+      hours,
+      minutes,
+      seconds,
       running,
-      elapsedMs,
       start,
       pause,
       stop,
       reset,
+      setElapsedMs,
     }),
-    [running, elapsedMs, start, pause, stop, reset]
+    [hours, minutes, seconds, running, start, pause, stop, reset]
   );
 
   return (
