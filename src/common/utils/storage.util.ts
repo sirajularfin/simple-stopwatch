@@ -21,6 +21,15 @@ class StorageUtil {
   get saveToLocalStorage() {
     return (key: string, value: string): void => {
       try {
+        const item = this.loadItemFromStorage(key);
+        if (item) {
+          const parsedArray = JSON.parse(item);
+          if (Array.isArray(parsedArray)) {
+            const updatedArray = [...parsedArray, value];
+            localStorage.setItem(key, JSON.stringify(updatedArray));
+            return;
+          }
+        }
         localStorage.setItem(key, value);
       } catch {
         logger('[LocalStorage] Error setting item', 'error');
