@@ -27,7 +27,7 @@ const TimeCounter: React.FC = () => {
 
   const handleSavePreset = () => {
     if (!presetsLabel.trim()) return;
-    savePresets(presetsLabel);
+    savePresets();
     setPresetsLabel('');
   };
 
