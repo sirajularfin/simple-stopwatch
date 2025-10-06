@@ -9,3 +9,11 @@ export const msToTime = (ms: number) => {
     seconds: duration.seconds,
   };
 };
+
+export const timeToMs = (
+  hours: number = 0,
+  minutes: number = 0,
+  seconds: number = 0
+) => {
+  return hours * 3600000 + minutes * 60000 + seconds * 1000;
+};

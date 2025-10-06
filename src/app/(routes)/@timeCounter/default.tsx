@@ -2,11 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 import React, { useEffect } from 'react';
-import z from 'zod';
 
 import { ACTION_TYPES } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
-import { timeTickSchema } from '@/common/utils/validation.util';
+import { clamp, toInt } from '@/common/utils/number.util';
+import { timeToMs } from '@/common/utils/time.util';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
 import TextInput from '@/components/TextInput/TextInput';
@@ -15,7 +15,15 @@ import classes from './style.module.scss';
 
 const TimeCounter: React.FC = () => {
   const t = useTranslations();
-  const { presetsLabel, setPresetsLabel, savePresets } = useTimer();
+  const {
+    hours,
+    minutes,
+    seconds,
+    presetsLabel,
+    setPresetsLabel,
+    savePresets,
+    setElapsedMs,
+  } = useTimer();
 
   const handleSavePreset = () => {
     if (!presetsLabel.trim()) return;
@@ -28,16 +36,19 @@ const TimeCounter: React.FC = () => {
     const minuteTick = document.getElementById('minuteTick');
     const secondTick = document.getElementById('secondTick');
 
+    const computeMsFromDom = () => {
+      const h = toInt(hourTick?.innerText);
+      const m = clamp(toInt(minuteTick?.innerText), 0, 59);
+      const s = clamp(toInt(secondTick?.innerText), 0, 59);
+      return timeToMs(h, m, s);
+    };
+
     const handleHourClick = () => {
       hourTick?.setAttribute('contentEditable', 'true');
       hourTick?.focus();
-      try {
-        timeTickSchema.parse({ hour: hourTick?.innerText });
-      } catch (error) {
-        z.treeifyError(error as z.ZodError);
-      }
     };
     const handleHourBlur = () => {
+      setElapsedMs(computeMsFromDom());
       hourTick?.setAttribute('contentEditable', 'false');
       logger(`[HourTick] Content: ${hourTick?.innerText}`);
     };
@@ -45,13 +56,9 @@ const TimeCounter: React.FC = () => {
     const handleMinuteClick = () => {
       minuteTick?.setAttribute('contentEditable', 'true');
       minuteTick?.focus();
-      try {
-        timeTickSchema.parse({ minute: minuteTick?.innerText });
-      } catch (error) {
-        z.treeifyError(error as z.ZodError);
-      }
     };
     const handleMinuteBlur = () => {
+      setElapsedMs(computeMsFromDom());
       minuteTick?.setAttribute('contentEditable', 'false');
       logger(`[MinuteTick] Content: ${minuteTick?.innerText}`);
     };
@@ -59,13 +66,9 @@ const TimeCounter: React.FC = () => {
     const handleSecondClick = () => {
       secondTick?.setAttribute('contentEditable', 'true');
       secondTick?.focus();
-      try {
-        timeTickSchema.parse({ second: secondTick?.innerText });
-      } catch (error) {
-        z.treeifyError(error as z.ZodError);
-      }
     };
     const handleSecondBlur = () => {
+      setElapsedMs(computeMsFromDom());
       secondTick?.setAttribute('contentEditable', 'false');
       logger(`[SecondTick] Content: ${secondTick?.innerText}`);
     };
@@ -78,6 +81,8 @@ const TimeCounter: React.FC = () => {
 
     secondTick?.addEventListener('click', handleSecondClick);
     secondTick?.addEventListener('blur', handleSecondBlur);
+
+    setElapsedMs(computeMsFromDom());
 
     return () => {
       hourTick?.removeEventListener('click', handleHourClick);
@@ -95,7 +100,7 @@ const TimeCounter: React.FC = () => {
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.timerPreset}>
-          <DisplayTimer />
+          <DisplayTimer hours={hours} minutes={minutes} seconds={seconds} />
           <TextInput
             placeholder={t('savePreset_placeholder')}
             value={presetsLabel}
