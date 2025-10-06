@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ACTION_TYPES } from '@/common/types/constants';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import ActionButton from '../ActionButton/ActionButton';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
@@ -12,8 +12,8 @@ interface IProps {
   timestamp: string;
 }
 
-const Preset: React.FC<IProps> = async ({ title, timestamp, index }) => {
-  const t = await getTranslations();
+const Preset: React.FC<IProps> = ({ title, timestamp, index }) => {
+  const t = useTranslations();
 
   return (
     <div className={classes.container}>

@@ -1,15 +1,22 @@
 'use client';
 
-import logger from '@/common/utils/logger.util';
-import { msToTime } from '@/common/utils/time.util';
 import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
+
+import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
+import logger from '@/common/utils/logger.util';
+import {
+  loadItemFromStorage,
+  saveToLocalStorage,
+} from '@/common/utils/storage.util';
+import { msToTime } from '@/common/utils/time.util';
 import { ITimerContextProps } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
@@ -19,20 +26,34 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [presetsLabel, setPresetsLabel] = useState<string>('');
+  const [savedPresets, setSavedPresets] = useState<Record<string, number>>({});
   const { hours, minutes, seconds } = msToTime(elapsedMs);
   const raf = useRef<number | null>(null);
   const lastTick = useRef<number | null>(null);
 
-  logger(
-    `[TimerProvider] Render - elapsedMs: ${elapsedMs}, running: ${running}`
-  );
+  useEffect(() => {
+    loadPresets();
+  }, []);
 
   const tick = useCallback((t: number) => {
     if (lastTick.current == null) lastTick.current = t;
     const delta = t - lastTick.current;
     lastTick.current = t;
-    setElapsedMs(v => v + delta);
-    raf.current = requestAnimationFrame(tick);
+    setElapsedMs(v => {
+      const next = v - delta;
+      if (next <= 0) {
+        // Stop the timer at zero
+        if (raf.current) cancelAnimationFrame(raf.current);
+        raf.current = null;
+        setRunning(false);
+        return 0;
+      }
+      return next;
+    });
+    if (raf.current !== null) {
+      raf.current = requestAnimationFrame(tick);
+    }
   }, []);
 
   const start = useCallback(() => {
@@ -57,8 +78,25 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   const reset = useCallback(() => setElapsedMs(0), []);
 
+  const savePresets = useCallback(() => {
+    const presets = { [presetsLabel]: elapsedMs };
+    saveToLocalStorage(PRESET_KEY_DEFAULT, JSON.stringify(presets));
+    setSavedPresets(prev => ({ ...prev, ...presets }));
+    logger(`[TimerProvider] Presets saved: ${JSON.stringify(presets)}`);
+  }, [elapsedMs, presetsLabel]);
+
+  const loadPresets = useCallback(() => {
+    const presets = loadItemFromStorage(PRESET_KEY_DEFAULT);
+    if (presets) {
+      const parsed = JSON.parse(presets);
+      setSavedPresets(parsed);
+    }
+  }, []);
+
   const value = useMemo<ITimerContextProps>(
     () => ({
+      presetsLabel,
+      setPresetsLabel,
       hours,
       minutes,
       seconds,
@@ -67,9 +105,25 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
       pause,
       stop,
       reset,
+      savedPresets,
       setElapsedMs,
+      savePresets,
+      loadPresets,
     }),
-    [hours, minutes, seconds, running, start, pause, stop, reset]
+    [
+      presetsLabel,
+      hours,
+      minutes,
+      seconds,
+      running,
+      start,
+      pause,
+      stop,
+      reset,
+      savedPresets,
+      savePresets,
+      loadPresets,
+    ]
   );
 
   return (
