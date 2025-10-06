@@ -1,21 +1,21 @@
 import classNames from 'classnames';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { getTranslations } from 'next-intl/server';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
-interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string[];
-  helperText?: string;
+  onSuffixIconClick?: () => void;
 }
 
-const TextInput: React.FC<TextInputProps> = async ({
+const TextInput: React.FC<IProps> = ({
   error,
-  helperText,
+  onSuffixIconClick,
   ...props
 }) => {
-  const t = await getTranslations();
+  const t = useTranslations();
 
   return (
     <div
@@ -24,7 +24,11 @@ const TextInput: React.FC<TextInputProps> = async ({
       })}
     >
       <input className={classes.textInput} {...props} />
-      <Typography variant="labelLarge" className={classes.saveBtn}>
+      <Typography
+        variant="labelLarge"
+        className={classes.saveBtn}
+        onClick={onSuffixIconClick}
+      >
         {t('savePreset_button')}
       </Typography>
     </div>
