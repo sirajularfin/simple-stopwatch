@@ -1,19 +1,35 @@
-import { Metadata } from 'next';
+'use client';
 
+import { formatTime } from '@/common/utils/time.util';
 import Preset from '@/components/Preset/Preset';
+import { useTimer } from '@/contexts/timer/TimerProvider';
+import { useMemo } from 'react';
 import classes from './style.module.scss';
 
-export const metadata: Metadata = {
-  title: 'Focus Timer & Stopwatch | Pomodoro Presets',
-  description: 'A simple timer application built with Next.js',
-};
+export default function Timer() {
+  const { savedPresets } = useTimer();
 
-export default async function Timer() {
+  const presets = useMemo(() => {
+    if (!savedPresets) return [];
+    if (Array.isArray(savedPresets)) {
+      return savedPresets.flatMap(obj =>
+        Object.entries(obj).map(([key, value]) => ({ key, value }))
+      );
+    }
+    return Object.entries(savedPresets).map(([key, value]) => ({ key, value }));
+  }, [savedPresets]);
+
   return (
     <div className={classes.container}>
       <div className={classes.presets}>
-        <Preset title={'Study Time'} timestamp="25:00" index={1} />
-        <Preset title={'Study Time'} timestamp="25:00" index={1} />
+        {presets.map(({ key, value }, index) => (
+          <Preset
+            key={`${key}-${index}`}
+            index={index}
+            title={key}
+            timestamp={formatTime(value as number)}
+          />
+        ))}
       </div>
     </div>
   );

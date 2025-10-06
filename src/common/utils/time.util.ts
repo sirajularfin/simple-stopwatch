@@ -17,3 +17,12 @@ export const timeToMs = (
 ) => {
   return hours * 3600000 + minutes * 60000 + seconds * 1000;
 };
+
+export const formatTime = (elapsedMs: number) => {
+  const { hours, minutes, seconds } = msToTime(elapsedMs);
+  const pad = (num: number | undefined) => String(num ?? 0).padStart(2, '0');
+  if (hours && hours > 0) {
+    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+  }
+  return `${pad(minutes)}:${pad(seconds)}`;
+};

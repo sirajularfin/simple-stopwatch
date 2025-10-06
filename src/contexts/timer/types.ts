@@ -7,6 +7,7 @@ export interface ITimerState {
 
 export interface ITimerContextProps extends ITimerState {
   presetsLabel: string;
+  savedPresets: Record<string, number>;
   setPresetsLabel: React.Dispatch<React.SetStateAction<string>>;
   start: () => void;
   pause: () => void;
@@ -14,4 +15,5 @@ export interface ITimerContextProps extends ITimerState {
   reset: () => void;
   setElapsedMs: React.Dispatch<React.SetStateAction<number>>;
   savePresets: (name: string) => void;
+  loadPresets: () => void;
 }
