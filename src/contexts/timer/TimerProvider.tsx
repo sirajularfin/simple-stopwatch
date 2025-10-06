@@ -1,9 +1,5 @@
 'use client';
 
-import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
-import logger from '@/common/utils/logger.util';
-import { saveToLocalStorage } from '@/common/utils/storage.util';
-import { msToTime } from '@/common/utils/time.util';
 import React, {
   createContext,
   useCallback,
@@ -12,6 +8,11 @@ import React, {
   useRef,
   useState,
 } from 'react';
+
+import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
+import logger from '@/common/utils/logger.util';
+import { saveToLocalStorage } from '@/common/utils/storage.util';
+import { msToTime } from '@/common/utils/time.util';
 import { ITimerContextProps } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
