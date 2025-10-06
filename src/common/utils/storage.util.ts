@@ -19,7 +19,7 @@ class StorageUtil {
   }
 
   get saveToLocalStorage() {
-    return (key: string, value: string): void => {
+    return (key: string, value: unknown): void => {
       try {
         const item = this.loadItemFromStorage(key);
         if (item) {
@@ -30,7 +30,7 @@ class StorageUtil {
             return;
           }
         }
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, JSON.stringify([value]));
       } catch {
         logger('[LocalStorage] Error setting item', 'error');
       }

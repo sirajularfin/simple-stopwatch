@@ -1,5 +1,6 @@
 'use client';
 
+import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import { saveToLocalStorage } from '@/common/utils/storage.util';
 import { msToTime } from '@/common/utils/time.util';
@@ -56,10 +57,10 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   const reset = useCallback(() => setElapsedMs(0), []);
 
   const savePresets = useCallback(() => {
-    const presets = { [presetsLabel]: { hours, minutes, seconds } };
-    saveToLocalStorage('presets', JSON.stringify(presets));
+    const presets = { [presetsLabel]: elapsedMs };
+    saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
     logger(`[TimerProvider] Presets saved: ${JSON.stringify(presets)}`);
-  }, [hours, minutes, presetsLabel, seconds]);
+  }, [elapsedMs, presetsLabel]);
 
   const value = useMemo<ITimerContextProps>(
     () => ({
