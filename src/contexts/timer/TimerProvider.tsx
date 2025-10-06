@@ -68,7 +68,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   const savePresets = useCallback(() => {
     const presets = { [presetsLabel]: elapsedMs };
-    saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+    saveToLocalStorage(PRESET_KEY_DEFAULT, JSON.stringify(presets));
     setSavedPresets(prev => ({ ...prev, ...presets }));
     logger(`[TimerProvider] Presets saved: ${JSON.stringify(presets)}`);
   }, [elapsedMs, presetsLabel]);

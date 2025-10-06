@@ -9,15 +9,14 @@ import classes from './style.module.scss';
 export default function Timer() {
   const { savedPresets } = useTimer();
 
-  const presets = useMemo(() => {
-    if (!savedPresets) return [];
-    if (Array.isArray(savedPresets)) {
-      return savedPresets.flatMap(obj =>
-        Object.entries(obj).map(([key, value]) => ({ key, value }))
-      );
-    }
-    return Object.entries(savedPresets).map(([key, value]) => ({ key, value }));
-  }, [savedPresets]);
+const presets = useMemo(() => {
+  const normalizedPresets =
+    savedPresets && !Array.isArray(savedPresets) ? savedPresets : {};
+  return Object.entries(normalizedPresets).map(([key, value]) => ({
+    key,
+    value,
+  }));
+}, [savedPresets]);
 
   return (
     <div className={classes.container}>

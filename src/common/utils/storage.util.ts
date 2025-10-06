@@ -28,7 +28,7 @@ class StorageUtil {
   }
 
   get saveToLocalStorage() {
-    return (key: string, value: unknown): void => {
+    return (key: string, value: string): void => {
       if (!this.isBrowser) {
         logger(`[LocalStorage] Skipped set (SSR): ${key}`);
         return;
@@ -37,17 +37,16 @@ class StorageUtil {
         const item = this.loadItemFromStorage(key);
         if (item) {
           try {
-            const parsed = JSON.parse(item);
-            if (Array.isArray(parsed)) {
-              const updatedArray = [...parsed, value];
-              window.localStorage.setItem(key, JSON.stringify(updatedArray));
-              return;
-            }
+            window.localStorage.setItem(
+              key,
+              JSON.stringify({ ...JSON.parse(item), ...JSON.parse(value) })
+            );
+            return;
           } catch {
             // fall through and overwrite below
           }
         }
-        window.localStorage.setItem(key, JSON.stringify([value]));
+        window.localStorage.setItem(key, JSON.stringify(value));
       } catch {
         logger('[LocalStorage] Error setting item', 'error');
       }
