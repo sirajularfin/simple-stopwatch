@@ -1,20 +1,15 @@
 import classNames from 'classnames';
+import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
-import { getTranslations } from 'next-intl/server';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
-interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string[];
-  helperText?: string;
 }
 
-const TextInput: React.FC<TextInputProps> = async ({
-  error,
-  helperText,
-  ...props
-}) => {
+const TextInput: React.FC<IProps> = async ({ error, ...props }) => {
   const t = await getTranslations();
 
   return (
