@@ -10,25 +10,13 @@ interface IProps {
 const DisplayTimer: React.FC<IProps> = ({ hours, minutes, seconds }) => {
   return (
     <div className={classes.container}>
-      <div
-        className={classes.tickWrapper}
-        id="hourTick"
-        contentEditable="false"
-      >
+      <div className={classes.tickWrapper} id="hourTick">
         {hours}
       </div>
-      <div
-        className={classes.tickWrapper}
-        id="minuteTick"
-        contentEditable="false"
-      >
+      <div className={classes.tickWrapper} id="minuteTick">
         {minutes}
       </div>
-      <div
-        className={classes.tickWrapper}
-        id="secondTick"
-        contentEditable="false"
-      >
+      <div className={classes.tickWrapper} id="secondTick">
         {seconds}
       </div>
     </div>
