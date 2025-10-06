@@ -14,6 +14,6 @@ export interface ITimerContextProps extends ITimerState {
   stop: () => void;
   reset: () => void;
   setElapsedMs: React.Dispatch<React.SetStateAction<number>>;
-  savePresets: (name: string) => void;
+  savePresets: () => void;
   loadPresets: () => void;
 }
