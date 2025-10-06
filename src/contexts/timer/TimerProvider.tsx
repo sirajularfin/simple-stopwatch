@@ -40,8 +40,20 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     if (lastTick.current == null) lastTick.current = t;
     const delta = t - lastTick.current;
     lastTick.current = t;
-    setElapsedMs(v => v - delta);
-    raf.current = requestAnimationFrame(tick);
+    setElapsedMs(v => {
+      const next = v - delta;
+      if (next <= 0) {
+        // Stop the timer at zero
+        if (raf.current) cancelAnimationFrame(raf.current);
+        raf.current = null;
+        setRunning(false);
+        return 0;
+      }
+      return next;
+    });
+    if (raf.current !== null) {
+      raf.current = requestAnimationFrame(tick);
+    }
   }, []);
 
   const start = useCallback(() => {
