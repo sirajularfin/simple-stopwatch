@@ -1,7 +1,7 @@
 .presets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(convertPxToRem(200), 1fr));
-  gap: convertPxToRem(40);
+  grid-template-columns: repeat(4, 1fr);
   margin: 0 auto;
   max-width: $default-max-width;
+  place-items: center;
 }
