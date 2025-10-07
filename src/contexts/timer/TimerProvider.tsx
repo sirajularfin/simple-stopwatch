@@ -114,6 +114,15 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     });
   }, []);
 
+  // Find timer presets
+  const findTimerPresets = useCallback(
+    (index: number) => {
+      const preset = Object.values(storedPresets)[index];
+      setElapsedMs(preset);
+    },
+    [storedPresets]
+  );
+
   // Memoized context value
   const value = useMemo<ITimerContextProps>(
     () => ({
@@ -127,6 +136,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
         pause,
         stop,
         setElapsedMs,
+        findTimerPresets,
         cacheTimerPresets,
         deleteTimerPresets,
       },
@@ -139,6 +149,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
       pause,
       stop,
       setElapsedMs,
+      findTimerPresets,
       cacheTimerPresets,
       deleteTimerPresets,
     ]

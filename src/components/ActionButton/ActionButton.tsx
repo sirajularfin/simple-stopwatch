@@ -8,7 +8,7 @@ import { useTimer } from '@/contexts/timer/TimerProvider';
 import classes from './style.module.scss';
 
 interface IProps {
-  elementId: number;
+  elementId?: number;
   type: ACTION_TYPES;
   size?: 'MEDIUM' | 'LARGE';
 }
@@ -30,6 +30,10 @@ const ActionButton: React.FC<IProps> = ({
   const handleAction = () => {
     switch (type) {
       case ACTION_TYPES.PLAY:
+        if (typeof elementId === 'number') {
+          functions.findTimerPresets(elementId);
+          return;
+        }
         functions.start();
         break;
       case ACTION_TYPES.PAUSE:
@@ -39,7 +43,9 @@ const ActionButton: React.FC<IProps> = ({
         functions.stop();
         break;
       case ACTION_TYPES.DELETE:
-        functions.deleteTimerPresets(elementId);
+        if (typeof elementId === 'number') {
+          functions.deleteTimerPresets(elementId);
+        }
         break;
       default:
         break;
