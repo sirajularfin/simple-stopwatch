@@ -24,9 +24,21 @@ const Preset: React.FC<IProps> = ({ title, timestamp, index }) => {
         {timestamp}
       </Typography>
       <div className={classes.actionButtons}>
-        <ActionButton type={ACTION_TYPES.PLAY} size="MEDIUM" />
-        <ActionButton type={ACTION_TYPES.EDIT} size="MEDIUM" />
-        <ActionButton type={ACTION_TYPES.DELETE} size="MEDIUM" />
+        <ActionButton
+          type={ACTION_TYPES.PLAY}
+          size="MEDIUM"
+          elementId={index}
+        />
+        <ActionButton
+          type={ACTION_TYPES.EDIT}
+          size="MEDIUM"
+          elementId={index}
+        />
+        <ActionButton
+          type={ACTION_TYPES.DELETE}
+          size="MEDIUM"
+          elementId={index}
+        />
       </div>
       <Typography variant="labelLarge" align="center" className={classes.text}>
         {t.rich('preset_label', {

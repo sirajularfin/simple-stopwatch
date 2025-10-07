@@ -14,6 +14,7 @@ import { useTimer } from '@/contexts/timer/TimerProvider';
 import classes from './style.module.scss';
 
 interface IProps {
+  elementId: number;
   type: ACTION_TYPES;
   size?: 'MEDIUM' | 'LARGE';
 }
@@ -26,7 +27,11 @@ const ACTION_BUTTON_ICONS = {
   [ACTION_TYPES.STOP]: <StopIcon />,
 };
 
-const ActionButton: React.FC<IProps> = ({ type, size = 'MEDIUM' }) => {
+const ActionButton: React.FC<IProps> = ({
+  type,
+  size = 'MEDIUM',
+  elementId,
+}) => {
   const { functions } = useTimer();
 
   const handleAction = () => {
@@ -44,7 +49,7 @@ const ActionButton: React.FC<IProps> = ({ type, size = 'MEDIUM' }) => {
         // Implement edit functionality
         break;
       case ACTION_TYPES.DELETE:
-        functions.reset();
+        functions.deleteTimerPresets(elementId);
         break;
       default:
         break;

@@ -14,6 +14,7 @@ import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import {
   loadItemFromStorage,
+  overrideStorageItem,
   saveToLocalStorage,
 } from '@/common/utils/storage.util';
 import { ITimerContextProps } from './types';
@@ -28,7 +29,9 @@ export const useTimer = () => {
   return context;
 };
 
-export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const TimerProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   // State
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
@@ -99,6 +102,18 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) =
     [elapsedMs]
   );
 
+  // Delete timer presets
+  const deleteTimerPresets = useCallback((index: number) => {
+    setStoredPresets(prev => {
+      const updated = { ...prev };
+      const label = Object.keys(updated)[index];
+      delete updated[label];
+      overrideStorageItem(PRESET_KEY_DEFAULT, JSON.stringify(updated));
+      logger(`[TimerProvider] Preset deleted: ${label}`);
+      return updated;
+    });
+  }, []);
+
   // Memoized context value
   const value = useMemo<ITimerContextProps>(
     () => ({
@@ -113,6 +128,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) =
         stop,
         setElapsedMs,
         cacheTimerPresets,
+        deleteTimerPresets,
       },
     }),
     [
@@ -124,6 +140,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       stop,
       setElapsedMs,
       cacheTimerPresets,
+      deleteTimerPresets,
     ]
   );
 

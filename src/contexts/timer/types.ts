@@ -9,6 +9,7 @@ export interface ITimerFunctions {
   pause: () => void;
   stop: () => void;
   cacheTimerPresets: (label: string) => void;
+  deleteTimerPresets: (index: number) => void;
   setElapsedMs: React.Dispatch<React.SetStateAction<number>>;
 }
 

@@ -57,6 +57,20 @@ class StorageUtil {
     };
   }
 
+  get overrideStorageItem() {
+    return (key: string, value: string): void => {
+      if (!this.isBrowser) {
+        logger(`[LocalStorage] Skipped override (SSR): ${key}`);
+        return;
+      }
+      try {
+        window.localStorage.setItem(key, value);
+      } catch {
+        logger('[LocalStorage] Error overriding item', 'error');
+      }
+    };
+  }
+
   get removeStorageItem() {
     return (key: string): void => {
       if (!this.isBrowser) return;
@@ -92,4 +106,5 @@ export const {
   saveToLocalStorage,
   removeStorageItem,
   resetStorage,
+  overrideStorageItem,
 } = StorageUtil.getInstance();
