@@ -30,11 +30,6 @@ const Preset: React.FC<IProps> = ({ title, timestamp, index }) => {
           elementId={index}
         />
         <ActionButton
-          type={ACTION_TYPES.EDIT}
-          size="MEDIUM"
-          elementId={index}
-        />
-        <ActionButton
           type={ACTION_TYPES.DELETE}
           size="MEDIUM"
           elementId={index}

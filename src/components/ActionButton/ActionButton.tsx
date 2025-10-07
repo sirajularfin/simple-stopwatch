@@ -2,13 +2,7 @@
 
 import classNames from 'classnames';
 
-import {
-  DeleteIcon,
-  EditIcon,
-  PauseIcon,
-  ResumeIcon,
-  StopIcon,
-} from '@/assets';
+import { DeleteIcon, PauseIcon, ResumeIcon, StopIcon } from '@/assets';
 import { ACTION_TYPES } from '@/common/types/constants';
 import { useTimer } from '@/contexts/timer/TimerProvider';
 import classes from './style.module.scss';
@@ -22,7 +16,6 @@ interface IProps {
 const ACTION_BUTTON_ICONS = {
   [ACTION_TYPES.PAUSE]: <PauseIcon />,
   [ACTION_TYPES.PLAY]: <ResumeIcon />,
-  [ACTION_TYPES.EDIT]: <EditIcon />,
   [ACTION_TYPES.DELETE]: <DeleteIcon />,
   [ACTION_TYPES.STOP]: <StopIcon />,
 };
@@ -44,9 +37,6 @@ const ActionButton: React.FC<IProps> = ({
         break;
       case ACTION_TYPES.STOP:
         functions.stop();
-        break;
-      case ACTION_TYPES.EDIT:
-        // Implement edit functionality
         break;
       case ACTION_TYPES.DELETE:
         functions.deleteTimerPresets(elementId);
