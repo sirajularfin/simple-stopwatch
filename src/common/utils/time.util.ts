@@ -4,9 +4,9 @@ export const msToTime = (ms: number) => {
   const duration = intervalToDuration({ start: 0, end: ms });
 
   return {
-    hours: duration.hours,
-    minutes: duration.minutes,
-    seconds: duration.seconds,
+    hours: duration.hours ?? 0,
+    minutes: duration.minutes ?? 0,
+    seconds: duration.seconds ?? 0,
   };
 };
 
