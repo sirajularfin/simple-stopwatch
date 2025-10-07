@@ -37,18 +37,36 @@ class StorageUtil {
         const item = this.loadItemFromStorage(key);
         if (item) {
           try {
-            window.localStorage.setItem(
-              key,
-              JSON.stringify({ ...JSON.parse(item), ...JSON.parse(value) })
-            );
+            const parsedNewValue = JSON.parse(value);
+            const parsedExistingItem = JSON.parse(item);
+            const data = JSON.stringify({
+              ...parsedExistingItem,
+              ...parsedNewValue,
+            });
+            window.localStorage.setItem(key, data);
             return;
           } catch {
-            // fall through and overwrite below
+            window.localStorage.setItem(key, value);
+            return;
           }
         }
-        window.localStorage.setItem(key, JSON.stringify(value));
+        window.localStorage.setItem(key, value);
       } catch {
         logger('[LocalStorage] Error setting item', 'error');
+      }
+    };
+  }
+
+  get overrideStorageItem() {
+    return (key: string, value: string): void => {
+      if (!this.isBrowser) {
+        logger(`[LocalStorage] Skipped override (SSR): ${key}`);
+        return;
+      }
+      try {
+        window.localStorage.setItem(key, value);
+      } catch {
+        logger('[LocalStorage] Error overriding item', 'error');
       }
     };
   }
@@ -88,4 +106,5 @@ export const {
   saveToLocalStorage,
   removeStorageItem,
   resetStorage,
+  overrideStorageItem,
 } = StorageUtil.getInstance();

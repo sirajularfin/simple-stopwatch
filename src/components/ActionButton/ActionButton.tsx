@@ -2,18 +2,13 @@
 
 import classNames from 'classnames';
 
-import {
-  DeleteIcon,
-  EditIcon,
-  PauseIcon,
-  ResumeIcon,
-  StopIcon,
-} from '@/assets';
+import { DeleteIcon, PauseIcon, ResumeIcon, StopIcon } from '@/assets';
 import { ACTION_TYPES } from '@/common/types/constants';
 import { useTimer } from '@/contexts/timer/TimerProvider';
 import classes from './style.module.scss';
 
 interface IProps {
+  elementId?: number;
   type: ACTION_TYPES;
   size?: 'MEDIUM' | 'LARGE';
 }
@@ -21,30 +16,36 @@ interface IProps {
 const ACTION_BUTTON_ICONS = {
   [ACTION_TYPES.PAUSE]: <PauseIcon />,
   [ACTION_TYPES.PLAY]: <ResumeIcon />,
-  [ACTION_TYPES.EDIT]: <EditIcon />,
   [ACTION_TYPES.DELETE]: <DeleteIcon />,
   [ACTION_TYPES.STOP]: <StopIcon />,
 };
 
-const ActionButton: React.FC<IProps> = ({ type, size = 'MEDIUM' }) => {
-  const { start, pause, stop, reset } = useTimer();
+const ActionButton: React.FC<IProps> = ({
+  type,
+  size = 'MEDIUM',
+  elementId,
+}) => {
+  const { functions } = useTimer();
 
   const handleAction = () => {
     switch (type) {
       case ACTION_TYPES.PLAY:
-        start();
+        if (typeof elementId === 'number') {
+          functions.findTimerPresets(elementId);
+          return;
+        }
+        functions.start();
         break;
       case ACTION_TYPES.PAUSE:
-        pause();
+        functions.pause();
         break;
       case ACTION_TYPES.STOP:
-        stop();
-        break;
-      case ACTION_TYPES.EDIT:
-        // Implement edit functionality
+        functions.stop();
         break;
       case ACTION_TYPES.DELETE:
-        reset();
+        if (typeof elementId === 'number') {
+          functions.deleteTimerPresets(elementId);
+        }
         break;
       default:
         break;

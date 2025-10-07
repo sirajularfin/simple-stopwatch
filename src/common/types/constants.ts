@@ -1,5 +1,5 @@
 export const DEFAULT_VALUE_ZERO = 0;
-export const PRESET_KEY_DEFAULT = 'PRESETS';
+export const PRESET_KEY_DEFAULT = 'PRESETS_DEFAULT';
 
 export enum APP_LANGUAGES {
   EN = 'en',
