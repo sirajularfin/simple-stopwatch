@@ -6,6 +6,12 @@
   background: linear-gradient(90deg, color(blue-700) 0%, color(blue-900) 100%);
   border-top-left-radius: convertPxToRem(20);
   border-top-right-radius: convertPxToRem(20);
+
+  @include media-query(md) {
+    width: 100%;
+    gap: convertPxToRem(10);
+    padding: convertPxToRem(20);
+  }
 }
 
 .tickWrapper {
@@ -28,4 +34,10 @@
   line-height: convertPxToRem(200);
   text-align: center;
   text-shadow: 0 convertPxToRem(4) convertPxToRem(4) rgba(0, 0, 0, 0.25);
+
+  @include media-query(md) {
+    width: 100%;
+    min-width: 0;
+    min-height: convertPxToRem(100);
+  }
 }

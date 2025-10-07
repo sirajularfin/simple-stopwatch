@@ -88,6 +88,8 @@ const useTimeCounter = () => {
       hours,
       minutes,
       seconds,
+      elapsedMs: state.elapsedMs,
+      isRunning: state.running,
       presetsLabel,
     },
     functions: {
