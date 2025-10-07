@@ -88,8 +88,6 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) =
     setElapsedMs(0);
   }, [pause]);
 
-  const reset = useCallback(() => setElapsedMs(0), []);
-
   // Preset caching
   const cacheTimerPresets = useCallback(
     (label: string) => {
@@ -113,7 +111,6 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) =
         start,
         pause,
         stop,
-        reset,
         setElapsedMs,
         cacheTimerPresets,
       },
@@ -125,7 +122,6 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       start,
       pause,
       stop,
-      reset,
       setElapsedMs,
       cacheTimerPresets,
     ]
