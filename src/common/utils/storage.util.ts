@@ -37,9 +37,11 @@ class StorageUtil {
         const item = this.loadItemFromStorage(key);
         if (item) {
           try {
+            const parsedNewValue = JSON.parse(value);
+            const parsedExistingItem = JSON.parse(item);
             window.localStorage.setItem(
               key,
-              JSON.stringify({ ...JSON.parse(item), ...JSON.parse(value) })
+              JSON.stringify({ ...parsedExistingItem, ...parsedNewValue })
             );
             return;
           } catch {

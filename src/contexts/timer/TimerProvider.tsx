@@ -20,18 +20,27 @@ import { ITimerContextProps } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
 
-export const TimerProvider: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
+export const useTimer = () => {
+  const context = useContext(TimerContext);
+  if (!context) {
+    throw new Error('useTimer must be used within a TimerProvider');
+  }
+  return context;
+};
+
+export const TimerProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+  // State
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
   const [storedPresets, setStoredPresets] = useState<Record<string, number>>(
     {}
   );
 
+  // Refs
   const raf = useRef<number | null>(null);
   const lastTick = useRef<number | null>(null);
 
+  // Load presets from storage on mount
   useEffect(() => {
     const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
     if (response) {
@@ -40,6 +49,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, []);
 
+  // Timer tick logic
   const tick = useCallback((t: number) => {
     if (lastTick.current == null) lastTick.current = t;
     const delta = t - lastTick.current;
@@ -47,10 +57,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     setElapsedMs(v => {
       const next = v - delta;
       if (next <= 0) {
-        // Stop the timer at zero
-        if (raf.current) cancelAnimationFrame(raf.current);
-        raf.current = null;
-        setRunning(false);
+        pause();
         return 0;
       }
       return next;
@@ -60,6 +67,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, []);
 
+  // Timer controls
   const start = useCallback(() => {
     if (running) return;
     setRunning(true);
@@ -82,6 +90,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   const reset = useCallback(() => setElapsedMs(0), []);
 
+  // Preset caching
   const cacheTimerPresets = useCallback(
     (label: string) => {
       const presets = JSON.stringify({ [label]: elapsedMs });
@@ -92,6 +101,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     [elapsedMs]
   );
 
+  // Memoized context value
   const value = useMemo<ITimerContextProps>(
     () => ({
       state: {
@@ -124,12 +134,4 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   return (
     <TimerContext.Provider value={value}>{children}</TimerContext.Provider>
   );
-};
-
-export const useTimer = () => {
-  const context = useContext(TimerContext);
-  if (!context) {
-    throw new Error('useTimer must be used within a TimerProvider');
-  }
-  return context;
 };

@@ -12,8 +12,9 @@ const useTimeCounter = () => {
   const { hours, minutes, seconds } = msToTime(state.elapsedMs);
 
   const storePresetLabel = () => {
-    if (!presetsLabel.trim()) return;
-    functions.cacheTimerPresets(presetsLabel.trim());
+    const cleanLabel = presetsLabel.trim();
+    if (!cleanLabel) return;
+    functions.cacheTimerPresets(cleanLabel);
   };
 
   useEffect(() => {
