@@ -7,6 +7,10 @@
   & .text {
     color: color(white);
   }
+
+  @include media-query(md) {
+    width: 100%;
+  }
 }
 
 .actionButtons {

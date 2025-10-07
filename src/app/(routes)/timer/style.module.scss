@@ -1,6 +1,13 @@
 .presets {
-  display: flex;
-  gap: convertPxToRem(80);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin: 0 auto;
   max-width: $default-max-width;
+  place-items: center;
+
+  @include media-query(md) {
+    grid-template-columns: 1fr;
+    place-items: stretch;
+    gap: convertPxToRem(20);
+  }
 }
