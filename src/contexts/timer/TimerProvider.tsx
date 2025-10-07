@@ -14,28 +14,45 @@ import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import {
   loadItemFromStorage,
+  overrideStorageItem,
   saveToLocalStorage,
 } from '@/common/utils/storage.util';
-import { msToTime } from '@/common/utils/time.util';
 import { ITimerContextProps } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
 
+export const useTimer = () => {
+  const context = useContext(TimerContext);
+  if (!context) {
+    throw new Error('useTimer must be used within a TimerProvider');
+  }
+  return context;
+};
+
 export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  // State
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
-  const [presetsLabel, setPresetsLabel] = useState<string>('');
-  const [savedPresets, setSavedPresets] = useState<Record<string, number>>({});
-  const { hours, minutes, seconds } = msToTime(elapsedMs);
+  const [storedPresets, setStoredPresets] = useState<Record<string, number>>(
+    {}
+  );
+
+  // Refs
   const raf = useRef<number | null>(null);
   const lastTick = useRef<number | null>(null);
 
+  // Load presets from storage on mount
   useEffect(() => {
-    loadPresets();
+    const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
+    if (response) {
+      const timerPresets = JSON.parse(response);
+      setStoredPresets(timerPresets);
+    }
   }, []);
 
+  // Timer tick logic
   const tick = useCallback((t: number) => {
     if (lastTick.current == null) lastTick.current = t;
     const delta = t - lastTick.current;
@@ -43,10 +60,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     setElapsedMs(v => {
       const next = v - delta;
       if (next <= 0) {
-        // Stop the timer at zero
-        if (raf.current) cancelAnimationFrame(raf.current);
-        raf.current = null;
-        setRunning(false);
+        pause();
         return 0;
       }
       return next;
@@ -56,6 +70,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     }
   }, []);
 
+  // Timer controls
   const start = useCallback(() => {
     if (running) return;
     setRunning(true);
@@ -76,65 +91,71 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     setElapsedMs(0);
   }, [pause]);
 
-  const reset = useCallback(() => setElapsedMs(0), []);
+  // Preset caching
+  const cacheTimerPresets = useCallback(
+    (label: string) => {
+      const presets = JSON.stringify({ [label]: elapsedMs });
+      saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+      setStoredPresets(prev => ({ ...prev, ...JSON.parse(presets) }));
+      logger(`[TimerProvider] Presets saved: ${presets}`);
+    },
+    [elapsedMs]
+  );
 
-  const savePresets = useCallback(() => {
-    const presets = { [presetsLabel]: elapsedMs };
-    saveToLocalStorage(PRESET_KEY_DEFAULT, JSON.stringify(presets));
-    setSavedPresets(prev => ({ ...prev, ...presets }));
-    logger(`[TimerProvider] Presets saved: ${JSON.stringify(presets)}`);
-  }, [elapsedMs, presetsLabel]);
-
-  const loadPresets = useCallback(() => {
-    const presets = loadItemFromStorage(PRESET_KEY_DEFAULT);
-    if (presets) {
-      const parsed = JSON.parse(presets);
-      setSavedPresets(parsed);
-    }
+  // Delete timer presets
+  const deleteTimerPresets = useCallback((index: number) => {
+    setStoredPresets(prev => {
+      const updated = { ...prev };
+      const label = Object.keys(updated)[index];
+      delete updated[label];
+      overrideStorageItem(PRESET_KEY_DEFAULT, JSON.stringify(updated));
+      logger(`[TimerProvider] Preset deleted: ${label}`);
+      return updated;
+    });
   }, []);
 
+  // Find timer presets
+  const findTimerPresets = useCallback(
+    (index: number) => {
+      const preset = Object.values(storedPresets)[index];
+      setElapsedMs(preset);
+    },
+    [storedPresets]
+  );
+
+  // Memoized context value
   const value = useMemo<ITimerContextProps>(
     () => ({
-      presetsLabel,
-      setPresetsLabel,
-      hours,
-      minutes,
-      seconds,
-      running,
-      start,
-      pause,
-      stop,
-      reset,
-      savedPresets,
-      setElapsedMs,
-      savePresets,
-      loadPresets,
+      state: {
+        elapsedMs,
+        running,
+        storedPresets,
+      },
+      functions: {
+        start,
+        pause,
+        stop,
+        setElapsedMs,
+        findTimerPresets,
+        cacheTimerPresets,
+        deleteTimerPresets,
+      },
     }),
     [
-      presetsLabel,
-      hours,
-      minutes,
-      seconds,
+      elapsedMs,
       running,
+      storedPresets,
       start,
       pause,
       stop,
-      reset,
-      savedPresets,
-      savePresets,
-      loadPresets,
+      setElapsedMs,
+      findTimerPresets,
+      cacheTimerPresets,
+      deleteTimerPresets,
     ]
   );
 
   return (
     <TimerContext.Provider value={value}>{children}</TimerContext.Provider>
   );
-};
-
-export const useTimer = () => {
-  const context = useContext(TimerContext);
-  if (!context) {
-    throw new Error('useTimer must be used within a TimerProvider');
-  }
-  return context;
 };
