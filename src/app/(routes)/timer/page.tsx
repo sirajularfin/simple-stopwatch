@@ -7,16 +7,18 @@ import { useMemo } from 'react';
 import classes from './style.module.scss';
 
 export default function Timer() {
-  const { savedPresets } = useTimer();
+  const { state } = useTimer();
 
-const presets = useMemo(() => {
-  const normalizedPresets =
-    savedPresets && !Array.isArray(savedPresets) ? savedPresets : {};
-  return Object.entries(normalizedPresets).map(([key, value]) => ({
-    key,
-    value,
-  }));
-}, [savedPresets]);
+  const presets = useMemo(() => {
+    const normalizedPresets =
+      state.storedPresets && !Array.isArray(state.storedPresets)
+        ? state.storedPresets
+        : {};
+    return Object.entries(normalizedPresets).map(([key, value]) => ({
+      key,
+      value,
+    }));
+  }, [state.storedPresets]);
 
   return (
     <div className={classes.container}>

@@ -1,19 +1,19 @@
 export interface ITimerState {
-  hours: number | undefined;
-  minutes: number | undefined;
-  seconds: number | undefined;
+  elapsedMs: number;
   running: boolean;
+  storedPresets: Record<string, number>;
 }
 
-export interface ITimerContextProps extends ITimerState {
-  presetsLabel: string;
-  savedPresets: Record<string, number>;
-  setPresetsLabel: React.Dispatch<React.SetStateAction<string>>;
+export interface ITimerFunctions {
   start: () => void;
   pause: () => void;
   stop: () => void;
   reset: () => void;
+  cacheTimerPresets: (label: string) => void;
   setElapsedMs: React.Dispatch<React.SetStateAction<number>>;
-  savePresets: () => void;
-  loadPresets: () => void;
+}
+
+export interface ITimerContextProps {
+  state: ITimerState;
+  functions: ITimerFunctions;
 }

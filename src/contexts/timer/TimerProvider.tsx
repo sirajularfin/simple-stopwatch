@@ -16,7 +16,6 @@ import {
   loadItemFromStorage,
   saveToLocalStorage,
 } from '@/common/utils/storage.util';
-import { msToTime } from '@/common/utils/time.util';
 import { ITimerContextProps } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
@@ -26,14 +25,19 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
-  const [presetsLabel, setPresetsLabel] = useState<string>('');
-  const [savedPresets, setSavedPresets] = useState<Record<string, number>>({});
-  const { hours, minutes, seconds } = msToTime(elapsedMs);
+  const [storedPresets, setStoredPresets] = useState<Record<string, number>>(
+    {}
+  );
+
   const raf = useRef<number | null>(null);
   const lastTick = useRef<number | null>(null);
 
   useEffect(() => {
-    loadPresets();
+    const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
+    if (response) {
+      const timerPresets = JSON.parse(response);
+      setStoredPresets(timerPresets);
+    }
   }, []);
 
   const tick = useCallback((t: number) => {
@@ -78,51 +82,42 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   const reset = useCallback(() => setElapsedMs(0), []);
 
-  const savePresets = useCallback(() => {
-    const presets = { [presetsLabel]: elapsedMs };
-    saveToLocalStorage(PRESET_KEY_DEFAULT, JSON.stringify(presets));
-    setSavedPresets(prev => ({ ...prev, ...presets }));
-    logger(`[TimerProvider] Presets saved: ${JSON.stringify(presets)}`);
-  }, [elapsedMs, presetsLabel]);
-
-  const loadPresets = useCallback(() => {
-    const presets = loadItemFromStorage(PRESET_KEY_DEFAULT);
-    if (presets) {
-      const parsed = JSON.parse(presets);
-      setSavedPresets(parsed);
-    }
-  }, []);
+  const cacheTimerPresets = useCallback(
+    (label: string) => {
+      const presets = JSON.stringify({ [label]: elapsedMs });
+      saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+      setStoredPresets(prev => ({ ...prev, ...JSON.parse(presets) }));
+      logger(`[TimerProvider] Presets saved: ${presets}`);
+    },
+    [elapsedMs]
+  );
 
   const value = useMemo<ITimerContextProps>(
     () => ({
-      presetsLabel,
-      setPresetsLabel,
-      hours,
-      minutes,
-      seconds,
-      running,
-      start,
-      pause,
-      stop,
-      reset,
-      savedPresets,
-      setElapsedMs,
-      savePresets,
-      loadPresets,
+      state: {
+        elapsedMs,
+        running,
+        storedPresets,
+      },
+      functions: {
+        start,
+        pause,
+        stop,
+        reset,
+        setElapsedMs,
+        cacheTimerPresets,
+      },
     }),
     [
-      presetsLabel,
-      hours,
-      minutes,
-      seconds,
+      elapsedMs,
       running,
+      storedPresets,
       start,
       pause,
       stop,
       reset,
-      savedPresets,
-      savePresets,
-      loadPresets,
+      setElapsedMs,
+      cacheTimerPresets,
     ]
   );
 

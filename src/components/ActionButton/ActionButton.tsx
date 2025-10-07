@@ -27,24 +27,24 @@ const ACTION_BUTTON_ICONS = {
 };
 
 const ActionButton: React.FC<IProps> = ({ type, size = 'MEDIUM' }) => {
-  const { start, pause, stop, reset } = useTimer();
+  const { functions } = useTimer();
 
   const handleAction = () => {
     switch (type) {
       case ACTION_TYPES.PLAY:
-        start();
+        functions.start();
         break;
       case ACTION_TYPES.PAUSE:
-        pause();
+        functions.pause();
         break;
       case ACTION_TYPES.STOP:
-        stop();
+        functions.stop();
         break;
       case ACTION_TYPES.EDIT:
         // Implement edit functionality
         break;
       case ACTION_TYPES.DELETE:
-        reset();
+        functions.reset();
         break;
       default:
         break;
