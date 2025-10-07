@@ -39,16 +39,18 @@ class StorageUtil {
           try {
             const parsedNewValue = JSON.parse(value);
             const parsedExistingItem = JSON.parse(item);
-            window.localStorage.setItem(
-              key,
-              JSON.stringify({ ...parsedExistingItem, ...parsedNewValue })
-            );
+            const data = JSON.stringify({
+              ...parsedExistingItem,
+              ...parsedNewValue,
+            });
+            window.localStorage.setItem(key, data);
             return;
           } catch {
-            // fall through and overwrite below
+            window.localStorage.setItem(key, value);
+            return;
           }
         }
-        window.localStorage.setItem(key, JSON.stringify(value));
+        window.localStorage.setItem(key, value);
       } catch {
         logger('[LocalStorage] Error setting item', 'error');
       }

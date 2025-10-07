@@ -15,6 +15,7 @@ const useTimeCounter = () => {
     const cleanLabel = presetsLabel.trim();
     if (!cleanLabel) return;
     functions.cacheTimerPresets(cleanLabel);
+    setPresetsLabel('');
   };
 
   useEffect(() => {
