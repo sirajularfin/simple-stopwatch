@@ -6,7 +6,6 @@
   background: linear-gradient(90deg, color(blue-700) 0%, color(blue-900) 100%);
   border-top-left-radius: convertPxToRem(20);
   border-top-right-radius: convertPxToRem(20);
-
   @include media-query(md) {
     gap: convertPxToRem(10);
     padding: convertPxToRem(20) convertPxToRem(10);
@@ -40,7 +39,6 @@
     display: flex;
     flex-direction: column;
     row-gap: convertPxToRem(10);
-
     @include media-query(md) {
       right: convertPxToRem(0);
     }
@@ -49,7 +47,6 @@
       cursor: pointer;
       width: convertPxToRem(40);
       height: convertPxToRem(40);
-
       @include media-query(md) {
         width: convertPxToRem(20);
         height: convertPxToRem(20);

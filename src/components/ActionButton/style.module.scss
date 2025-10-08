@@ -12,7 +12,6 @@
 .LARGE_SIZE {
   height: convertPxToRem(80);
   width: convertPxToRem(80);
-
   @include media-query(md) {
     height: convertPxToRem(60);
     width: convertPxToRem(60);
@@ -22,7 +21,6 @@
 .MEDIUM_SIZE {
   height: convertPxToRem(40);
   width: convertPxToRem(40);
-
   @include media-query(md) {
     height: convertPxToRem(30);
     width: convertPxToRem(30);

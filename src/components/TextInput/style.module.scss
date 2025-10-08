@@ -5,7 +5,6 @@
   border-bottom-left-radius: convertPxToRem(20);
   border-bottom-right-radius: convertPxToRem(20);
   padding: convertPxToRem(20);
-
   @include media-query(md) {
     padding: convertPxToRem(10) convertPxToRem(15);
   }
@@ -32,7 +31,6 @@
   cursor: pointer;
   white-space: nowrap;
   color: color(blue-900);
-
   @include media-query(md) {
     white-space: normal;
     text-align: center;
