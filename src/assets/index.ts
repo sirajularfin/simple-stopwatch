@@ -7,6 +7,7 @@ import MailIcon from './svg/mail-icon.svg';
 import PauseIcon from './svg/pause-icon.svg';
 import ResetIcon from './svg/reset-icon.svg';
 import ResumeIcon from './svg/resume-icon.svg';
+import SaveIcon from './svg/save-icon.svg';
 import SprintIcon from './svg/sprint-icon.svg';
 import StopIcon from './svg/stop-icon.svg';
 
@@ -20,6 +21,7 @@ export {
   PauseIcon,
   ResetIcon,
   ResumeIcon,
+  SaveIcon,
   SprintIcon,
   StopIcon,
 };
