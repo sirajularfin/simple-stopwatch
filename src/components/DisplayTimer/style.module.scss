@@ -35,6 +35,7 @@
   text-shadow: 0 convertPxToRem(4) convertPxToRem(4) rgba(0, 0, 0, 0.25);
 
   & .arrowBtn {
+    display: none !important; // TODO: remove this line after implementing the functionality
     position: absolute;
     right: convertPxToRem(5);
     display: flex;
