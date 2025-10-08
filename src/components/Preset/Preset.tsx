@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ACTION_TYPES } from '@/common/types/constants';
+import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import ActionButton from '../ActionButton/ActionButton';
 import Typography from '../Typography/Typography';
@@ -17,12 +18,14 @@ const Preset: React.FC<IProps> = ({ title, timestamp, index }) => {
 
   return (
     <div className={classes.container}>
-      <Typography variant="headingLarge" className={classes.text}>
-        {title}
-      </Typography>
-      <Typography variant="displaySmall" className={classes.text}>
-        {timestamp}
-      </Typography>
+      <div>
+        <Typography variant="headingLarge" className={classes.text}>
+          {title}
+        </Typography>
+        <Typography variant="displaySmall" className={classes.text}>
+          {timestamp}
+        </Typography>
+      </div>
       <div className={classes.actionButtons}>
         <ActionButton
           type={ACTION_TYPES.PLAY}
@@ -35,7 +38,11 @@ const Preset: React.FC<IProps> = ({ title, timestamp, index }) => {
           elementId={index}
         />
       </div>
-      <Typography variant="labelLarge" align="center" className={classes.text}>
+      <Typography
+        variant="labelLarge"
+        align="center"
+        className={classNames(classes.text, classes.presetLabel)}
+      >
         {t.rich('preset_label', {
           span: children => <span>{children}</span>,
           index: index + 1,
