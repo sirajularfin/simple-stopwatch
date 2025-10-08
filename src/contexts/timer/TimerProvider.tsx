@@ -10,7 +10,10 @@ import React, {
   useState,
 } from 'react';
 
-import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
+import {
+  PRESET_KEY_DEFAULT,
+  TIMER_PRESET_OPTIONS,
+} from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import {
   loadItemFromStorage,
@@ -45,6 +48,11 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   // Load presets from storage on mount
   useEffect(() => {
+    TIMER_PRESET_OPTIONS.map(item => {
+      const presets = JSON.stringify({ [item.label]: item.value });
+      saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+    });
+
     const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
     if (response) {
       const timerPresets = JSON.parse(response);
