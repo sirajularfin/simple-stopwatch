@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { SaveIcon } from '@/assets';
 import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
@@ -25,7 +24,6 @@ const TextInput: React.FC<IProps> = ({
       })}
     >
       <input className={classes.textInput} {...props} />
-      <SaveIcon />
       <Typography
         variant="labelLarge"
         className={classes.saveBtn}

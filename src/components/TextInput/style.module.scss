@@ -6,17 +6,8 @@
   border-bottom-right-radius: convertPxToRem(20);
   padding: convertPxToRem(20);
 
-  & svg {
-    display: none;
-
-    @include media-query(md) {
-      color: color(blue-900);
-      cursor: pointer;
-      display: block;
-      height: auto;
-      margin: 0 !important;
-      width: convertPxToRem(35);
-    }
+  @include media-query(md) {
+    padding: convertPxToRem(10) convertPxToRem(15);
   }
 }
 
@@ -43,6 +34,8 @@
   color: color(blue-900);
 
   @include media-query(md) {
-    display: none;
+    white-space: normal;
+    text-align: center;
+    font-size: convertPxToRem(12) !important;
   }
 }
