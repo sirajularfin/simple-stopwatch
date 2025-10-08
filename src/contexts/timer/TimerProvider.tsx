@@ -11,7 +11,7 @@ import React, {
 } from 'react';
 
 import {
-  PRESET_KEY_DEFAULT,
+  TIMER_PRESET_KEY,
   TIMER_PRESET_OPTIONS,
 } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
@@ -56,9 +56,9 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
       {} as Record<string, number>
     );
     const presets = JSON.stringify(presetsObj);
-    saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+    saveToLocalStorage(TIMER_PRESET_KEY, presets);
 
-    const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
+    const response = loadItemFromStorage(TIMER_PRESET_KEY);
     if (response) {
       const timerPresets = JSON.parse(response);
       setStoredPresets(timerPresets);
@@ -113,7 +113,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   const cacheTimerPresets = useCallback(
     (label: string) => {
       const presets = JSON.stringify({ [label]: elapsedMs });
-      saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+      saveToLocalStorage(TIMER_PRESET_KEY, presets);
       setStoredPresets(prev => ({ ...prev, ...JSON.parse(presets) }));
       logger(`[TimerProvider] Presets saved: ${presets}`);
     },
@@ -126,7 +126,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
       const updated = { ...prev };
       const label = Object.keys(updated)[index];
       delete updated[label];
-      overrideStorageItem(PRESET_KEY_DEFAULT, JSON.stringify(updated));
+      overrideStorageItem(TIMER_PRESET_KEY, JSON.stringify(updated));
       logger(`[TimerProvider] Preset deleted: ${label}`);
       return updated;
     });
