@@ -60,7 +60,12 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     setElapsedMs(v => {
       const next = v - delta;
       if (next <= 0) {
-        pause();
+        if (raf.current) {
+          cancelAnimationFrame(raf.current);
+          raf.current = null;
+          lastTick.current = null;
+        }
+        setRunning(false);
         return 0;
       }
       return next;

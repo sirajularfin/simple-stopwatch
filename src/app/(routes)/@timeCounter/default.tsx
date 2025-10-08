@@ -31,7 +31,7 @@ const TimeCounter: React.FC = () => {
           />
         </div>
         <div className={classes.actionButtons}>
-          {state.isRunning && state.elapsedMs > 0 ? (
+          {state.isRunning ? (
             <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
           ) : (
             <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
