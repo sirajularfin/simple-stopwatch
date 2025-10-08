@@ -9,7 +9,7 @@
 
   @include media-query(md) {
     gap: convertPxToRem(10);
-    padding: convertPxToRem(20) convertPxToRem(15);
+    padding: convertPxToRem(20) convertPxToRem(10);
   }
 }
 
@@ -39,10 +39,10 @@
     right: convertPxToRem(5);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    row-gap: convertPxToRem(10);
 
     @include media-query(md) {
-      right: convertPxToRem(2);
+      right: convertPxToRem(0);
     }
 
     & svg {
@@ -51,14 +51,14 @@
       height: convertPxToRem(40);
 
       @include media-query(md) {
-        width: convertPxToRem(25);
-        height: convertPxToRem(25);
+        width: convertPxToRem(20);
+        height: convertPxToRem(20);
       }
     }
   }
 
   @include media-query(md) {
-    font-size: convertPxToRem(70);
+    font-size: convertPxToRem(60);
     line-height: convertPxToRem(100);
     min-height: convertPxToRem(100);
     letter-spacing: 0;
