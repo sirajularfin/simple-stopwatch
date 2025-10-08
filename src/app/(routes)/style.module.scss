@@ -29,3 +29,18 @@
     padding-bottom: convertPxToRem(20);
   }
 }
+
+.loader {
+  display: block;
+  margin: 0 auto;
+  & circle {
+    cx: 22;
+    cy: 22;
+    fill: none;
+    r: 18;
+    stroke: color(black);
+    stroke-dasharray: 80;
+    stroke-dashoffset: 60;
+    stroke-linecap: round;
+  }
+}
