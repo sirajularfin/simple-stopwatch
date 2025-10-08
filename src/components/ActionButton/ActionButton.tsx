@@ -27,7 +27,11 @@ const ACTION_BUTTON_ICONS = {
   [ACTION_TYPES.PLAY]: <ResumeIcon />,
   [ACTION_TYPES.DELETE]: <DeleteIcon />,
   [ACTION_TYPES.STOP]: <StopIcon />,
-  [ACTION_TYPES.RESET]: <ResetIcon />,
+  [ACTION_TYPES.RESET]: (
+    <span className={classes.RESET_ICON}>
+      <ResetIcon />
+    </span>
+  ),
   [ACTION_TYPES.LAP]: (
     <Typography variant="labelLarge" className={classes.LAP_BUTTON}>
       Lap

@@ -43,6 +43,13 @@
   background-color: color(red-500);
 }
 
+.RESET_ICON {
+  & svg {
+    width: convertPxToRem(35);
+    height: convertPxToRem(35);
+  }
+}
+
 .RESET_BUTTON {
   background-color: color(red-500);
 }
