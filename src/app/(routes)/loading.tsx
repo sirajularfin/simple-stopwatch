@@ -1,6 +1,6 @@
 import classes from './style.module.scss';
 
-const COMPONENT_SIZE = 44;
+const COMPONENT_SIZE = 50;
 const THICKNESS = 4;
 
 const Loading = () => {
