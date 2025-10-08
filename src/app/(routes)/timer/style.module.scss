@@ -5,6 +5,9 @@
   margin: 0 auto;
   max-width: $default-max-width;
   place-items: center;
+  @include media-query(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
   @include media-query(md) {
     grid-template-columns: 1fr;
     place-items: normal;

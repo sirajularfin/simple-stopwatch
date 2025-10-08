@@ -31,8 +31,13 @@
   display: flex;
   flex-direction: column;
   gap: convertPxToRem(20);
+  @include media-query(lg) {
+    flex-direction: row;
+    gap: convertPxToRem(60);
+  }
   @include media-query(md) {
     flex-direction: row;
+    gap: convertPxToRem(20);
   }
 }
 
