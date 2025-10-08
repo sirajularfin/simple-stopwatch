@@ -22,6 +22,7 @@ const TimeCounter: React.FC = () => {
             hours={state.hours}
             minutes={state.minutes}
             seconds={state.seconds}
+            isRunning={state.isRunning}
           />
           <TextInput
             placeholder={t('savePreset_placeholder')}

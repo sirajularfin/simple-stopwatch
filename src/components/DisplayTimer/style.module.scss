@@ -16,6 +16,7 @@
 .tickWrapper {
   display: flex;
   align-items: center;
+  position: relative;
   justify-content: center;
   box-shadow:
     inset 0 convertPxToRem(4) convertPxToRem(8) #00000033,
@@ -29,10 +30,32 @@
   color: color(blue-900);
   font-family: font(russo-one);
   font-size: convertPxToRem(120);
-  letter-spacing: convertPxToRem(10);
   line-height: convertPxToRem(200);
   text-align: center;
   text-shadow: 0 convertPxToRem(4) convertPxToRem(4) rgba(0, 0, 0, 0.25);
+
+  & .arrowBtn {
+    position: absolute;
+    right: convertPxToRem(5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media-query(md) {
+      right: convertPxToRem(2);
+    }
+
+    & svg {
+      cursor: pointer;
+      width: convertPxToRem(40);
+      height: convertPxToRem(40);
+
+      @include media-query(md) {
+        width: convertPxToRem(25);
+        height: convertPxToRem(25);
+      }
+    }
+  }
 
   @include media-query(md) {
     font-size: convertPxToRem(70);
