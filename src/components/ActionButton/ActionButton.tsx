@@ -2,9 +2,17 @@
 
 import classNames from 'classnames';
 
-import { DeleteIcon, PauseIcon, ResumeIcon, StopIcon } from '@/assets';
-import { ACTION_TYPES } from '@/common/types/constants';
+import {
+  DeleteIcon,
+  PauseIcon,
+  ResetIcon,
+  ResumeIcon,
+  StopIcon,
+} from '@/assets';
+import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
+import { useStopwatch } from '@/contexts/stopwatch/StopwatchProvider';
 import { useTimer } from '@/contexts/timer/TimerProvider';
+import { usePathname } from 'next/navigation';
 import classes from './style.module.scss';
 
 interface IProps {
@@ -18,6 +26,7 @@ const ACTION_BUTTON_ICONS = {
   [ACTION_TYPES.PLAY]: <ResumeIcon />,
   [ACTION_TYPES.DELETE]: <DeleteIcon />,
   [ACTION_TYPES.STOP]: <StopIcon />,
+  [ACTION_TYPES.RESET]: <ResetIcon />,
 };
 
 const ActionButton: React.FC<IProps> = ({
@@ -25,26 +34,32 @@ const ActionButton: React.FC<IProps> = ({
   size = 'MEDIUM',
   elementId,
 }) => {
-  const { functions } = useTimer();
+  const { functions: timerControls } = useTimer();
+  const { functions: stopwatchControls } = useStopwatch();
+
+  const pathname = usePathname();
+  const isTimerMode =
+    pathname.toUpperCase().replace('/', '') === APPLICATION_MODES.TIMER;
+  const functions = isTimerMode ? timerControls : stopwatchControls;
 
   const handleAction = () => {
     switch (type) {
       case ACTION_TYPES.PLAY:
         if (typeof elementId === 'number') {
-          functions.findTimerPresets(elementId);
+          timerControls?.findTimerPresets(elementId);
           return;
         }
         functions.start();
         break;
       case ACTION_TYPES.PAUSE:
-        functions.pause();
+        timerControls.pause();
         break;
       case ACTION_TYPES.STOP:
         functions.stop();
         break;
       case ACTION_TYPES.DELETE:
         if (typeof elementId === 'number') {
-          functions.deleteTimerPresets(elementId);
+          timerControls.deleteTimerPresets(elementId);
         }
         break;
       default:

@@ -14,6 +14,31 @@ const TimeCounter: React.FC = () => {
   const t = useTranslations();
   const { state, functions } = useTimeCounter();
 
+  const togglePlayPause = () => {
+    return state.isRunning ? (
+      <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
+    ) : (
+      <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
+    );
+  };
+
+  const renderTimerControls = () => (
+    <div className={classes.timerControls}>
+      {togglePlayPause()}
+      <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
+    </div>
+  );
+
+  const renderStopwatchControls = () => (
+    <div className={classes.stopwatchControls}>
+      {togglePlayPause()}
+      <div className={classes.actionButtons}>
+        <ActionButton type={ACTION_TYPES.RESET} size="LARGE" />
+        <ActionButton type={ACTION_TYPES.LAP} size="LARGE" />
+      </div>
+    </div>
+  );
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -31,14 +56,7 @@ const TimeCounter: React.FC = () => {
             onSuffixIconClick={functions.storePresetLabel}
           />
         </div>
-        <div className={classes.actionButtons}>
-          {state.isRunning ? (
-            <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
-          ) : (
-            <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
-          )}
-          <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
-        </div>
+        {state.isTimerMode ? renderTimerControls() : renderStopwatchControls()}
       </div>
     </div>
   );

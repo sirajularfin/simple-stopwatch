@@ -17,6 +17,7 @@ export enum ACTION_TYPES {
   PLAY = 'PLAY',
   RESET = 'RESET',
   STOP = 'STOP',
+  LAP = 'LAP',
 }
 
 export enum TIMER_PRESETS {

@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 
+import { APPLICATION_MODES } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import { clamp, toInt } from '@/common/utils/number.util';
 import { msToTime, timeToMs } from '@/common/utils/time.util';
 import { useTimer } from '@/contexts/timer/TimerProvider';
+import { usePathname } from 'next/navigation';
 
 const useTimeCounter = () => {
+  const pathname = usePathname();
   const { state, functions } = useTimer();
   const [presetsLabel, setPresetsLabel] = React.useState('');
 
+  const isTimerMode =
+    pathname.toUpperCase().replace('/', '') === APPLICATION_MODES.TIMER;
   const { hours, minutes, seconds } = msToTime(state.elapsedMs);
 
   const storePresetLabel = () => {
@@ -88,6 +93,7 @@ const useTimeCounter = () => {
       hours,
       minutes,
       seconds,
+      isTimerMode,
       elapsedMs: state.elapsedMs,
       isRunning: state.running,
       presetsLabel,
