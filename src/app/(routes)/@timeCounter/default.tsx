@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ACTION_TYPES } from '@/common/types/constants';
+import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
 import TextInput from '@/components/TextInput/TextInput';
@@ -47,14 +47,21 @@ const TimeCounter: React.FC = () => {
             hours={state.hours}
             minutes={state.minutes}
             seconds={state.seconds}
+            appMode={
+              state.isTimerMode
+                ? APPLICATION_MODES.TIMER
+                : APPLICATION_MODES.STOPWATCH
+            }
             isRunning={state.isRunning}
           />
-          <TextInput
-            placeholder={t('savePreset_placeholder')}
-            value={state.presetsLabel}
-            onChange={e => functions.setPresetsLabel(e.target.value)}
-            onSuffixIconClick={functions.storePresetLabel}
-          />
+          {state.isTimerMode && (
+            <TextInput
+              placeholder={t('savePreset_placeholder')}
+              value={state.presetsLabel}
+              onChange={e => functions.setPresetsLabel(e.target.value)}
+              onSuffixIconClick={functions.storePresetLabel}
+            />
+          )}
         </div>
         {state.isTimerMode ? renderTimerControls() : renderStopwatchControls()}
       </div>

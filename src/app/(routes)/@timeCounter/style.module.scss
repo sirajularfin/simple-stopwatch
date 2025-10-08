@@ -36,7 +36,7 @@
 .stopwatchControls {
   display: flex;
   flex-direction: column;
-  gap: convertPxToRem(80);
+  gap: convertPxToRem(50);
   @include media-query(md) {
     flex-direction: row;
   }
@@ -45,7 +45,7 @@
 .actionButtons {
   display: flex;
   flex-direction: column;
-  gap: convertPxToRem(10);
+  gap: convertPxToRem(5);
   @include media-query(md) {
     flex-direction: row;
   }

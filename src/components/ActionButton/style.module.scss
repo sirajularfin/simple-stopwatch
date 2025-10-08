@@ -10,8 +10,8 @@
 }
 
 .LARGE_SIZE {
-  height: convertPxToRem(80);
-  width: convertPxToRem(80);
+  height: convertPxToRem(70);
+  width: convertPxToRem(70);
   @include media-query(md) {
     height: convertPxToRem(60);
     width: convertPxToRem(60);
