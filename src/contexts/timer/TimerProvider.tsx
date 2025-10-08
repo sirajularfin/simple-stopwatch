@@ -10,7 +10,10 @@ import React, {
   useState,
 } from 'react';
 
-import { PRESET_KEY_DEFAULT } from '@/common/types/constants';
+import {
+  PRESET_KEY_DEFAULT,
+  TIMER_PRESET_OPTIONS,
+} from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import {
   loadItemFromStorage,
@@ -45,6 +48,16 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   // Load presets from storage on mount
   useEffect(() => {
+    const presetsObj = TIMER_PRESET_OPTIONS.reduce(
+      (acc, item) => {
+        acc[item.label] = item.value;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+    const presets = JSON.stringify(presetsObj);
+    saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
+
     const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
     if (response) {
       const timerPresets = JSON.parse(response);
@@ -60,7 +73,12 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     setElapsedMs(v => {
       const next = v - delta;
       if (next <= 0) {
-        pause();
+        if (raf.current) {
+          cancelAnimationFrame(raf.current);
+          raf.current = null;
+          lastTick.current = null;
+        }
+        setRunning(false);
         return 0;
       }
       return next;
