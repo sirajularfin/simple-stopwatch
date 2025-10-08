@@ -38,7 +38,9 @@
   flex-direction: column;
   gap: convertPxToRem(50);
   @include media-query(md) {
+    width: 100%;
     flex-direction: row;
+    justify-content: space-around;
   }
 }
 
@@ -48,5 +50,6 @@
   gap: convertPxToRem(5);
   @include media-query(md) {
     flex-direction: row;
+    gap: convertPxToRem(20);
   }
 }

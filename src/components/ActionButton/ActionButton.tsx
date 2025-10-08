@@ -13,6 +13,7 @@ import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
 import { useStopwatch } from '@/contexts/stopwatch/StopwatchProvider';
 import { useTimer } from '@/contexts/timer/TimerProvider';
 import { usePathname } from 'next/navigation';
+import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
 interface IProps {
@@ -27,6 +28,11 @@ const ACTION_BUTTON_ICONS = {
   [ACTION_TYPES.DELETE]: <DeleteIcon />,
   [ACTION_TYPES.STOP]: <StopIcon />,
   [ACTION_TYPES.RESET]: <ResetIcon />,
+  [ACTION_TYPES.LAP]: (
+    <Typography variant="labelLarge" className={classes.LAP_BUTTON}>
+      Lap
+    </Typography>
+  ),
 };
 
 const ActionButton: React.FC<IProps> = ({
@@ -61,6 +67,12 @@ const ActionButton: React.FC<IProps> = ({
         if (typeof elementId === 'number') {
           timerControls.deleteTimerPresets(elementId);
         }
+        break;
+      case ACTION_TYPES.LAP:
+        // stopwatchControls.addLap();
+        break;
+      case ACTION_TYPES.RESET:
+        stopwatchControls.reset();
         break;
       default:
         break;
