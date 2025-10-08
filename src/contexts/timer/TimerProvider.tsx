@@ -48,10 +48,15 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   // Load presets from storage on mount
   useEffect(() => {
-    TIMER_PRESET_OPTIONS.map(item => {
-      const presets = JSON.stringify({ [item.label]: item.value });
-      saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
-    });
+    const presetsObj = TIMER_PRESET_OPTIONS.reduce(
+      (acc, item) => {
+        acc[item.label] = item.value;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+    const presets = JSON.stringify(presetsObj);
+    saveToLocalStorage(PRESET_KEY_DEFAULT, presets);
 
     const response = loadItemFromStorage(PRESET_KEY_DEFAULT);
     if (response) {
