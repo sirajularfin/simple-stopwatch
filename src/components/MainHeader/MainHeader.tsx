@@ -7,7 +7,7 @@ import Typography from '../Typography/Typography';
 import classes from './style.module.scss';
 
 const HEADER_NAVIGATION_LINKS = [
-  { href: APP_ROUTES.STOPWATCH, labelKey: 'stopwatch' },
+  // { href: APP_ROUTES.STOPWATCH, labelKey: 'stopwatch' },
   { href: APP_ROUTES.TIMER, labelKey: 'timer' },
 ];
 

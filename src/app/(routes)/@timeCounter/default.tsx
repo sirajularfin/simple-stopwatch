@@ -22,6 +22,7 @@ const TimeCounter: React.FC = () => {
             hours={state.hours}
             minutes={state.minutes}
             seconds={state.seconds}
+            isRunning={state.isRunning}
           />
           <TextInput
             placeholder={t('savePreset_placeholder')}
@@ -31,7 +32,7 @@ const TimeCounter: React.FC = () => {
           />
         </div>
         <div className={classes.actionButtons}>
-          {state.isRunning && state.elapsedMs > 0 ? (
+          {state.isRunning ? (
             <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
           ) : (
             <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
