@@ -8,8 +8,16 @@
     color: color(white);
   }
 
+  & .presetLabel {
+    @include media-query(md) {
+      display: none;
+    }
+  }
+
   @include media-query(md) {
-    // width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
   }
 }
 
@@ -18,4 +26,10 @@
   justify-content: space-around;
   margin-top: convertPxToRem(40);
   margin-bottom: convertPxToRem(20);
+
+  @include media-query(md) {
+    flex-direction: column;
+    gap: convertPxToRem(15);
+    margin: 0;
+  }
 }

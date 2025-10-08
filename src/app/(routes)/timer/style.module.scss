@@ -7,7 +7,8 @@
 
   @include media-query(md) {
     grid-template-columns: 1fr;
-    place-items: stretch;
+    place-items: normal;
     gap: convertPxToRem(20);
+    margin: 0 convertPxToRem(10);
   }
 }
