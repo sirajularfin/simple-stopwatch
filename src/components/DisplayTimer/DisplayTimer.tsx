@@ -19,30 +19,30 @@ const DisplayTimer: React.FC<IProps> = ({
     <div className={classes.container}>
       <div className={classes.tickWrapper} id="hourTick">
         {hours}
-        {!isRunning && (
+        {/* {!isRunning && (
           <div className={classes.arrowBtn}>
             <ArrowUpIcon />
             <ArrowDownIcon />
           </div>
-        )}
+        )} */}
       </div>
       <div className={classes.tickWrapper} id="minuteTick">
         {minutes}
-        {!isRunning && (
+        {/* {!isRunning && (
           <div className={classes.arrowBtn}>
             <ArrowUpIcon />
             <ArrowDownIcon />
           </div>
-        )}
+        )} */}
       </div>
       <div className={classes.tickWrapper} id="secondTick">
         {seconds}
-        {!isRunning && (
+        {/* {!isRunning && (
           <div className={classes.arrowBtn}>
             <ArrowUpIcon />
             <ArrowDownIcon />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
