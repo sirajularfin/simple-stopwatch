@@ -14,7 +14,7 @@
   "shortcut_tips": "Shortcut keys: Press ␣ Space to pause/resume · Press ⌫ Delete to reset.",
   "preset_label": "Preset {index}",
   "stopwatch_lap": {
-    "lap_number": "Lap Number",
+    "lap_number": "Lap",
     "lap_time": "Lap Time",
     "split_time": "Split Time"
   }

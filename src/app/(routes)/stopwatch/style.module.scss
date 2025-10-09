@@ -61,6 +61,10 @@
       font-size: convertPxToRem(12);
       padding: convertPxToRem(14) convertPxToRem(16);
     }
+    @include media-query(sm) {
+      font-size: convertPxToRem(10);
+      padding: convertPxToRem(14) convertPxToRem(14);
+    }
   }
 
   & td {
@@ -76,6 +80,11 @@
       font-size: convertPxToRem(16);
       letter-spacing: convertPxToRem(1);
       padding: convertPxToRem(8) convertPxToRem(16);
+    }
+    @include media-query(sm) {
+      font-size: convertPxToRem(14);
+      letter-spacing: convertPxToRem(0);
+      padding: convertPxToRem(8) convertPxToRem(14);
     }
   }
 }
