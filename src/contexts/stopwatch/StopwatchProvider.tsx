@@ -46,7 +46,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
   }, []);
 
   const tick = useCallback((ts: number) => {
-    if (lastTsRef.current == null) {
+    if (lastTsRef.current === null) {
       lastTsRef.current = ts;
     }
     const delta = ts - lastTsRef.current;

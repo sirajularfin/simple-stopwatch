@@ -21,7 +21,9 @@ export const timeToMs = (
 export const formatTime = (elapsedMs: number) => {
   const { hours, minutes, seconds } = msToTime(elapsedMs);
   const pad = (num: number | undefined) => String(num ?? 0).padStart(2, '0');
-  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+  return hours
+    ? `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+    : `${pad(minutes)}:${pad(seconds)}`;
 };
 
 export const formatTimeWithMs = (elapsedMs: number) => {

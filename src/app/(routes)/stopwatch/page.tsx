@@ -28,15 +28,9 @@ export default function Stopwatch() {
       <tbody>
         {state.lap.map((lap, index) => (
           <tr key={index}>
-            <td scope="row" align="left">
-              {index + 1}
-            </td>
-            <td scope="row" align="center">
-              {formatTimeWithMs(lap[0])}
-            </td>
-            <td scope="row" align="right">
-              {formatTimeWithMs(lap[1])}
-            </td>
+            <td align="left">{index + 1}</td>
+            <td align="center">{formatTimeWithMs(lap[0])}</td>
+            <td align="right">{formatTimeWithMs(lap[1])}</td>
           </tr>
         ))}
       </tbody>
