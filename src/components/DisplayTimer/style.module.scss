@@ -6,9 +6,6 @@
   background: linear-gradient(90deg, color(blue-700) 0%, color(blue-900) 100%);
   border-top-left-radius: convertPxToRem(20);
   border-top-right-radius: convertPxToRem(20);
-  @include media-query(lg) {
-    padding: convertPxToRem(20) convertPxToRem(20);
-  }
   @include media-query(md) {
     gap: convertPxToRem(10);
     padding: convertPxToRem(20) convertPxToRem(10);
