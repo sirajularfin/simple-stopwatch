@@ -90,7 +90,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
       const splitTime = newLap.length
         ? elapsedMs - newLap[newLap.length - 1][1]
         : elapsedMs;
-      newLap.push([splitTime, elapsedMs]);
+      newLap.unshift([splitTime, elapsedMs]);
       return newLap;
     });
   }, [elapsedMs]);
