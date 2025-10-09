@@ -46,17 +46,17 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   // Load presets from storage on mount
   useEffect(() => {
-    const presetsObj = TIMER_PRESET_OPTIONS.reduce((acc, item) => {
-      acc[item.label] = item.value;
-      return acc;
-    }, {} as TimerPresetRecord);
-    const presets = JSON.stringify(presetsObj);
-    saveToLocalStorage(TIMER_PRESET_KEY, presets);
-
     const response = loadItemFromStorage(TIMER_PRESET_KEY);
     if (response) {
       const timerPresets = JSON.parse(response);
       setStoredPresets(timerPresets);
+    } else {
+      const presetsObj = TIMER_PRESET_OPTIONS.reduce((acc, item) => {
+        acc[item.label] = item.value;
+        return acc;
+      }, {} as TimerPresetRecord);
+      const presets = JSON.stringify(presetsObj);
+      saveToLocalStorage(TIMER_PRESET_KEY, presets);
     }
   }, []);
 
@@ -109,7 +109,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
     (label: string) => {
       const presets = JSON.stringify({ [label]: elapsedMs });
       saveToLocalStorage(TIMER_PRESET_KEY, presets);
-      setStoredPresets(prev => ({ ...prev, ...JSON.parse(presets) }));
+      setStoredPresets(prev => ({ ...JSON.parse(presets), ...prev }));
       logger(`[TimerProvider] Presets saved: ${presets}`);
     },
     [elapsedMs]
