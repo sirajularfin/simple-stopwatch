@@ -8,6 +8,7 @@ interface IStopwatchFunctions {
   start: () => void;
   stop: () => void;
   reset: () => void;
+  recordLap: () => void;
 }
 
 export interface IStopwatchContextProps {
@@ -15,4 +16,4 @@ export interface IStopwatchContextProps {
   functions: IStopwatchFunctions;
 }
 
-export type LapTimeRecord = Record<number, number>;
+export type LapTimeRecord = Array<[number, number]>;

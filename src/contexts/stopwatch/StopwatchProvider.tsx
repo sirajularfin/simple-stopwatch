@@ -30,7 +30,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
 }) => {
   const [elapsedMs, setElapsedMs] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [lap, setLap] = useState<LapTimeRecord>({});
+  const [lap, setLap] = useState<LapTimeRecord>([]);
 
   // requestAnimationFrame refs
   const rafRef = useRef<number | null>(null);
@@ -93,6 +93,17 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
     accMsRef.current = 0;
   }, []);
 
+  const recordLap = useCallback(() => {
+    setLap(prev => {
+      const newLap = [...prev];
+      const splitTime = newLap.length
+        ? elapsedMs - newLap[newLap.length - 1][1]
+        : elapsedMs;
+      newLap.push([splitTime, elapsedMs]);
+      return newLap;
+    });
+  }, [elapsedMs]);
+
   const value = useMemo<IStopwatchContextProps>(
     () => ({
       state: {
@@ -104,9 +115,10 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
         start,
         stop,
         reset,
+        recordLap,
       },
     }),
-    [elapsedMs, isRunning, start, stop, reset]
+    [lap, elapsedMs, isRunning, start, stop, reset, recordLap]
   );
 
   return (

@@ -73,7 +73,7 @@ const ActionButton: React.FC<IProps> = ({
         }
         break;
       case ACTION_TYPES.LAP:
-        // stopwatchControls.addLap();
+        stopwatchControls.recordLap();
         break;
       case ACTION_TYPES.RESET:
         stopwatchControls.reset();
