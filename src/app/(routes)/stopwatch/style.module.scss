@@ -6,7 +6,6 @@
   border-spacing: 0 convertPxToRem(10);
   @include media-query(md) {
     width: calc(100% - convertPxToRem(20));
-    border-spacing: 0 convertPxToRem(5);
   }
 
   & thead {
