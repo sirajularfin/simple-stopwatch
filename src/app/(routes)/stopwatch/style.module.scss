@@ -36,6 +36,17 @@
     }
   }
 
+  & tr {
+    filter: drop-shadow(
+        convertPxToRem(-5) convertPxToRem(-5) convertPxToRem(10)
+          rgba(color(blue-100), 0.5)
+      )
+      drop-shadow(
+        convertPxToRem(5) convertPxToRem(5) convertPxToRem(10)
+          rgba(color(blue-100), 0.5)
+      );
+  }
+
   & th {
     background-color: color(blue-grey-500);
     color: color(white);
