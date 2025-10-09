@@ -1,4 +1,5 @@
 import { APPLICATION_MODES } from '@/common/types/constants';
+import { padWithZeros } from '@/common/utils/time.util';
 import classNames from 'classnames';
 import React from 'react';
 import classes from './style.module.scss';
@@ -25,7 +26,7 @@ const DisplayTimer: React.FC<IProps> = ({
       })}
     >
       <div className={classes.tickWrapper} id="hourTick">
-        {hours}
+        {padWithZeros(hours)}
         {/* {!isRunning && (
           <div className={classes.arrowBtn}>
             <ArrowUpIcon />
@@ -34,7 +35,7 @@ const DisplayTimer: React.FC<IProps> = ({
         )} */}
       </div>
       <div className={classes.tickWrapper} id="minuteTick">
-        {minutes}
+        {padWithZeros(minutes)}
         {/* {!isRunning && (
           <div className={classes.arrowBtn}>
             <ArrowUpIcon />
@@ -43,7 +44,7 @@ const DisplayTimer: React.FC<IProps> = ({
         )} */}
       </div>
       <div className={classes.tickWrapper} id="secondTick">
-        {seconds}
+        {padWithZeros(seconds)}
         {/* {!isRunning && (
           <div className={classes.arrowBtn}>
             <ArrowUpIcon />

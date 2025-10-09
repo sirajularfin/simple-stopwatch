@@ -1,5 +1,8 @@
 import { intervalToDuration } from 'date-fns';
 
+export const padWithZeros = (num: number | undefined) =>
+  String(num ?? 0).padStart(2, '0');
+
 export const msToTime = (ms: number) => {
   const duration = intervalToDuration({ start: 0, end: ms });
 
@@ -20,16 +23,13 @@ export const timeToMs = (
 
 export const formatTime = (elapsedMs: number) => {
   const { hours, minutes, seconds } = msToTime(elapsedMs);
-  const pad = (num: number | undefined) => String(num ?? 0).padStart(2, '0');
   return hours
-    ? `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
-    : `${pad(minutes)}:${pad(seconds)}`;
+    ? `${padWithZeros(hours)}:${padWithZeros(minutes)}:${padWithZeros(seconds)}`
+    : `${padWithZeros(minutes)}:${padWithZeros(seconds)}`;
 };
 
 export const formatTimeWithMs = (elapsedMs: number) => {
   const { hours, minutes, seconds } = msToTime(elapsedMs);
   const ms = Math.floor((elapsedMs % 1000) / 10);
-  const pad = (num: number | undefined, size = 2) =>
-    String(num ?? 0).padStart(size, '0');
-  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(ms)}`;
+  return `${padWithZeros(hours)}:${padWithZeros(minutes)}:${padWithZeros(seconds)}.${padWithZeros(ms)}`;
 };
