@@ -20,7 +20,7 @@ import {
   overrideStorageItem,
   saveToLocalStorage,
 } from '@/common/utils/storage.util';
-import { ITimerContextProps } from './types';
+import { ITimerContextProps, TimerPresetRecord } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
 
@@ -38,9 +38,7 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   // State
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
-  const [storedPresets, setStoredPresets] = useState<Record<string, number>>(
-    {}
-  );
+  const [storedPresets, setStoredPresets] = useState<TimerPresetRecord>({});
 
   // Refs
   const raf = useRef<number | null>(null);
@@ -48,13 +46,10 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
 
   // Load presets from storage on mount
   useEffect(() => {
-    const presetsObj = TIMER_PRESET_OPTIONS.reduce(
-      (acc, item) => {
-        acc[item.label] = item.value;
-        return acc;
-      },
-      {} as Record<string, number>
-    );
+    const presetsObj = TIMER_PRESET_OPTIONS.reduce((acc, item) => {
+      acc[item.label] = item.value;
+      return acc;
+    }, {} as TimerPresetRecord);
     const presets = JSON.stringify(presetsObj);
     saveToLocalStorage(TIMER_PRESET_KEY, presets);
 

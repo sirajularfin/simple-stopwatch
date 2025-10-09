@@ -11,7 +11,7 @@ import React, {
   useState,
 } from 'react';
 
-import { IStopwatchContextProps } from './types';
+import { IStopwatchContextProps, LapTimeRecord } from './types';
 
 const StopwatchContext = createContext<IStopwatchContextProps | undefined>(
   undefined
@@ -30,6 +30,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
 }) => {
   const [elapsedMs, setElapsedMs] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [lap, setLap] = useState<LapTimeRecord>({});
 
   // requestAnimationFrame refs
   const rafRef = useRef<number | null>(null);
@@ -95,6 +96,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
   const value = useMemo<IStopwatchContextProps>(
     () => ({
       state: {
+        lap,
         elapsedMs,
         isRunning,
       },
