@@ -23,3 +23,11 @@ export const formatTime = (elapsedMs: number) => {
   const pad = (num: number | undefined) => String(num ?? 0).padStart(2, '0');
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 };
+
+export const formatTimeWithMs = (elapsedMs: number) => {
+  const { hours, minutes, seconds } = msToTime(elapsedMs);
+  const ms = Math.floor((elapsedMs % 1000) / 10);
+  const pad = (num: number | undefined, size = 2) =>
+    String(num ?? 0).padStart(size, '0');
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(ms)}`;
+};

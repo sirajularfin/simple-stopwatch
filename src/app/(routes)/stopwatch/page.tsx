@@ -1,6 +1,6 @@
 'use client';
 
-import { formatTime } from '@/common/utils/time.util';
+import { formatTimeWithMs } from '@/common/utils/time.util';
 import { useStopwatch } from '@/contexts/stopwatch/StopwatchProvider';
 import { useTranslations } from 'next-intl';
 import classes from './style.module.scss';
@@ -9,7 +9,6 @@ export default function Stopwatch() {
   const t = useTranslations('stopwatch_lap');
 
   const { state } = useStopwatch();
-  const splitTime = state.lap.map(lap => lap[1]);
 
   return (
     <table className={classes.table}>
@@ -33,10 +32,10 @@ export default function Stopwatch() {
               {index + 1}
             </td>
             <td scope="row" align="center">
-              {formatTime(lap[0])}
+              {formatTimeWithMs(lap[0])}
             </td>
             <td scope="row" align="right">
-              {formatTime(lap[1])}
+              {formatTimeWithMs(lap[1])}
             </td>
           </tr>
         ))}
