@@ -86,10 +86,10 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
 
   const recordLap = useCallback(() => {
     setLap(prev => {
-      const prevSplit = prev.length ? prev[prev.length - 1][1] : 0;
+      const prevSplit = prev.length ? prev[0][1] : 0;
       const lapTime = elapsedMs - prevSplit;
       const splitTime = elapsedMs;
-      return [...prev, [lapTime, splitTime]];
+      return [[lapTime, splitTime], ...prev];
     });
   }, [elapsedMs]);
 

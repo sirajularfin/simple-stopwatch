@@ -1,11 +1,13 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+import React from 'react';
+
 import { formatTimeWithMs } from '@/common/utils/time.util';
 import { useStopwatch } from '@/contexts/stopwatch/StopwatchProvider';
-import { useTranslations } from 'next-intl';
 import classes from './style.module.scss';
 
-export default function Stopwatch() {
+const Stopwatch: React.FC = () => {
   const t = useTranslations('stopwatch_lap');
 
   const { state } = useStopwatch();
@@ -26,7 +28,7 @@ export default function Stopwatch() {
         </tr>
       </thead>
       <tbody>
-        {[...state.lap].reverse().map((lap, index) => (
+        {state.lap.map((lap, index) => (
           <tr key={state.lap.length - index}>
             <td align="left">{state.lap.length - index}</td>
             <td align="center">{formatTimeWithMs(lap[0])}</td>
@@ -36,4 +38,6 @@ export default function Stopwatch() {
       </tbody>
     </table>
   );
-}
+};
+
+export default Stopwatch;
