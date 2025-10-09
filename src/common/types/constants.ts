@@ -1,5 +1,6 @@
 export const DEFAULT_VALUE_ZERO = 0;
-export const PRESET_KEY_DEFAULT = 'PRESETS_DEFAULT';
+export const TIMER_PRESET_KEY = 'TIMER_PRESETS';
+export const STOPWATCH_LAP_KEY = 'STOPWATCH_LAPS';
 
 export enum APP_LANGUAGES {
   EN = 'en',
@@ -17,6 +18,7 @@ export enum ACTION_TYPES {
   PLAY = 'PLAY',
   RESET = 'RESET',
   STOP = 'STOP',
+  LAP = 'LAP',
 }
 
 export enum TIMER_PRESETS {

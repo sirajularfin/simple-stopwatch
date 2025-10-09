@@ -1,0 +1,81 @@
+.table {
+  margin: 0 auto;
+  max-width: $default-max-width;
+  width: calc(100% - convertPxToRem(20));
+  border-collapse: separate;
+  border-spacing: 0 convertPxToRem(10);
+  @include media-query(lg) {
+    width: calc(100% - convertPxToRem(80));
+  }
+  @include media-query(md) {
+    width: calc(100% - convertPxToRem(20));
+  }
+
+  & thead {
+    & th:first-child {
+      border-top-left-radius: convertPxToRem(20);
+      border-bottom-left-radius: convertPxToRem(20);
+    }
+    & th:last-child {
+      border-top-right-radius: convertPxToRem(20);
+      border-bottom-right-radius: convertPxToRem(20);
+    }
+  }
+
+  & tbody {
+    & td:first-child {
+      border-top-left-radius: convertPxToRem(20);
+      border-bottom-left-radius: convertPxToRem(20);
+      border-width: convertPxToRem(2) 0 convertPxToRem(2) convertPxToRem(2);
+    }
+    & td:nth-child(2) {
+      border-width: convertPxToRem(2) 0 convertPxToRem(2) 0;
+    }
+    & td:last-child {
+      border-width: convertPxToRem(2) convertPxToRem(2) convertPxToRem(2) 0;
+      border-top-right-radius: convertPxToRem(20);
+      border-bottom-right-radius: convertPxToRem(20);
+    }
+  }
+
+  & tr {
+    filter: drop-shadow(
+        convertPxToRem(-5) convertPxToRem(-5) convertPxToRem(10)
+          rgba(color(blue-100), 0.5)
+      )
+      drop-shadow(
+        convertPxToRem(5) convertPxToRem(5) convertPxToRem(10)
+          rgba(color(blue-100), 0.5)
+      );
+  }
+
+  & th {
+    background-color: color(blue-grey-500);
+    color: color(white);
+    font-family: font(montserrat);
+    font-size: convertPxToRem(14);
+    font-weight: 500;
+    padding: convertPxToRem(18) convertPxToRem(28);
+    text-transform: uppercase;
+    @include media-query(md) {
+      font-size: convertPxToRem(12);
+      padding: convertPxToRem(14) convertPxToRem(16);
+    }
+  }
+
+  & td {
+    background-color: color(blue-grey-50);
+    border-color: color(blue-grey-500);
+    border-style: solid;
+    color: color(blue-grey-500);
+    font-family: font(russo-one);
+    font-size: convertPxToRem(20);
+    letter-spacing: convertPxToRem(2);
+    padding: convertPxToRem(10) convertPxToRem(28);
+    @include media-query(md) {
+      font-size: convertPxToRem(16);
+      letter-spacing: convertPxToRem(1);
+      padding: convertPxToRem(8) convertPxToRem(16);
+    }
+  }
+}

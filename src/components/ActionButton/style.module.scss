@@ -10,9 +10,8 @@
 }
 
 .LARGE_SIZE {
-  height: convertPxToRem(80);
-  width: convertPxToRem(80);
-
+  height: convertPxToRem(70);
+  width: convertPxToRem(70);
   @include media-query(md) {
     height: convertPxToRem(60);
     width: convertPxToRem(60);
@@ -22,7 +21,6 @@
 .MEDIUM_SIZE {
   height: convertPxToRem(40);
   width: convertPxToRem(40);
-
   @include media-query(md) {
     height: convertPxToRem(30);
     width: convertPxToRem(30);
@@ -45,6 +43,23 @@
   background-color: color(red-500);
 }
 
+.RESET_ICON {
+  & svg {
+    width: convertPxToRem(35);
+    height: convertPxToRem(35);
+  }
+}
+
+.RESET_BUTTON {
+  background-color: color(red-500);
+}
+
 .STOP_BUTTON {
   background-color: color(red-500);
+}
+
+.LAP_BUTTON {
+  background-color: color(green-500);
+  color: color(white);
+  text-transform: uppercase;
 }

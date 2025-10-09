@@ -10,8 +10,9 @@ import MainHeader from '@/components/MainHeader/MainHeader';
 import { AppProviders } from '@/contexts/AppProviders';
 
 export const metadata: Metadata = {
-  title: 'Stopwatch App',
-  description: 'A simple stopwatch application built with Next.js',
+  title: 'Focus Timer & Stopwatch - A Modern application built with Next.js',
+  description:
+    'Lightweight timer and stopwatch for focused work. Create and reuse presets, switch between countdown and stopwatch, and keep your settings in local storage. Clean, accessible, and responsive UI built with Next.js.',
 };
 
 export default async function RootLayout({

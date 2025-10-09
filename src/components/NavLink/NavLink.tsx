@@ -10,10 +10,9 @@ import classes from './style.module.scss';
 interface Props {
   href: string;
   children: React.ReactNode;
-  exact?: boolean;
 }
 
-export default function NavLink({ href, children, exact = false }: Props) {
+export default function NavLink({ href, children }: Props) {
   const pathname = usePathname();
   const isActive = pathname === href;
 
@@ -22,7 +21,6 @@ export default function NavLink({ href, children, exact = false }: Props) {
       href={href}
       className={classNames(classes.link, { [classes.active]: isActive })}
       aria-current={isActive ? 'page' : undefined}
-      prefetch
     >
       {children}
     </Link>
