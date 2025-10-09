@@ -7,7 +7,7 @@
   border-top-left-radius: convertPxToRem(20);
   border-top-right-radius: convertPxToRem(20);
   @include media-query(md) {
-    gap: convertPxToRem(10);
+    gap: convertPxToRem(5);
     padding: convertPxToRem(20) convertPxToRem(10);
   }
 }
