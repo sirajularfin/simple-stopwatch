@@ -6,7 +6,8 @@
     }
   },
   "footer": {
-    "text": "© {year} Simple Stopwatch. All rights reserved."
+    "text": "© {year} Focus Timer & Stopwatch. ",
+    "creator": "Made with ❤️ by Sirajul Arfin."
   },
   "button_play": "Play",
   "savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
@@ -16,6 +17,8 @@
   "stopwatch_lap": {
     "lap_number": "Lap",
     "lap_time": "Lap Time",
-    "split_time": "Split Time"
+    "split_time": "Split Time",
+    "fastest": "Fastest lap (this lap is the quickest)",
+    "slowest": "Slowest lap (this lap is the slowest)"
   }
 }

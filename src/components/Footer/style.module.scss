@@ -1,6 +1,11 @@
 .container {
   background-color: color(grey-800);
   color: color(grey-50);
-  padding: convertPxToRem(20) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: convertPxToRem(5);
+  justify-content: center;
+  padding: convertPxToRem(15) 0;
   text-align: center;
+  width: 100%;
 }

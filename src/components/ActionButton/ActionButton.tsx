@@ -20,6 +20,7 @@ interface IProps {
   elementId?: number;
   type: ACTION_TYPES;
   size?: 'MEDIUM' | 'LARGE';
+  disabled?: boolean;
 }
 
 const ACTION_BUTTON_ICONS = {
@@ -43,6 +44,7 @@ const ActionButton: React.FC<IProps> = ({
   type,
   size = 'MEDIUM',
   elementId,
+  disabled = false,
 }) => {
   const { functions: timerControls } = useTimer();
   const { functions: stopwatchControls } = useStopwatch();
@@ -92,6 +94,7 @@ const ActionButton: React.FC<IProps> = ({
       )}
       onClick={handleAction}
       type="button"
+      disabled={disabled}
       aria-label={type.toLowerCase()}
     >
       {ACTION_BUTTON_ICONS[type as keyof typeof ACTION_BUTTON_ICONS]}

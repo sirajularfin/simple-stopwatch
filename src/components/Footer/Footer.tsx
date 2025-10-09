@@ -15,6 +15,7 @@ const Footer: React.FC = async () => {
           year: new Date().getFullYear(),
         })}
       </Typography>
+      <Typography variant="bodyMedium">{t('creator')}</Typography>
     </footer>
   );
 };

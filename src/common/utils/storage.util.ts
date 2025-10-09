@@ -40,8 +40,8 @@ class StorageUtil {
             const parsedNewValue = JSON.parse(value);
             const parsedExistingItem = JSON.parse(item);
             const data = JSON.stringify({
-              ...parsedExistingItem,
               ...parsedNewValue,
+              ...parsedExistingItem,
             });
             window.localStorage.setItem(key, data);
             return;
