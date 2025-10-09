@@ -29,13 +29,12 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
   const [elapsedMs, setElapsedMs] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+  const [running, setRunning] = useState(false);
   const [lap, setLap] = useState<LapTimeRecord>([]);
 
   // requestAnimationFrame refs
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
-  const accMsRef = useRef(0); // accumulate ms until we cross 1000
 
   useEffect(() => {
     return () => {
@@ -52,29 +51,21 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
     }
     const delta = ts - lastTsRef.current;
     lastTsRef.current = ts;
-
-    // accumulate delta and convert to whole seconds
-    accMsRef.current += delta;
-    if (accMsRef.current >= 1000) {
-      const inc = Math.floor(accMsRef.current / 1000);
-      accMsRef.current -= inc * 1000;
-      setElapsedMs(prev => prev + inc);
-    }
-
+    setElapsedMs(prev => prev + delta);
     if (rafRef.current !== null) {
       rafRef.current = requestAnimationFrame(tick);
     }
   }, []);
 
   const start = useCallback(() => {
-    if (isRunning) return;
-    setIsRunning(true);
+    if (running) return;
+    setRunning(true);
     lastTsRef.current = null;
     rafRef.current = requestAnimationFrame(tick);
-  }, [isRunning, tick]);
+  }, [running, tick]);
 
   const stop = useCallback(() => {
-    setIsRunning(false);
+    setRunning(false);
     if (rafRef.current !== null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -84,13 +75,13 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
 
   const reset = useCallback(() => {
     setElapsedMs(0);
-    setIsRunning(false);
+    setLap([]);
+    setRunning(false);
     if (rafRef.current !== null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     }
     lastTsRef.current = null;
-    accMsRef.current = 0;
   }, []);
 
   const recordLap = useCallback(() => {
@@ -109,7 +100,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
       state: {
         lap,
         elapsedMs,
-        isRunning,
+        running,
       },
       functions: {
         start,
@@ -118,7 +109,7 @@ export const StopwatchProvider: React.FC<PropsWithChildren> = ({
         recordLap,
       },
     }),
-    [lap, elapsedMs, isRunning, start, stop, reset, recordLap]
+    [lap, elapsedMs, running, start, stop, reset, recordLap]
   );
 
   return (

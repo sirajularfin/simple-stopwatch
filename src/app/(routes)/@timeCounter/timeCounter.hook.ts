@@ -1,29 +1,32 @@
+import { usePathname } from 'next/navigation';
 import React, { useEffect } from 'react';
 
 import { APPLICATION_MODES } from '@/common/types/constants';
 import logger from '@/common/utils/logger.util';
 import { clamp, toInt } from '@/common/utils/number.util';
-import { msToTime, timeToMs } from '@/common/utils/time.util';
+import { timeToMs } from '@/common/utils/time.util';
+import { useStopwatch } from '@/contexts/stopwatch/StopwatchProvider';
 import { useTimer } from '@/contexts/timer/TimerProvider';
-import { usePathname } from 'next/navigation';
 
 const useTimeCounter = () => {
   const pathname = usePathname();
-  const { state, functions } = useTimer();
+  const { state: timerState, functions: timerFunctions } = useTimer();
+  const { state: stopwatchState } = useStopwatch();
   const [presetsLabel, setPresetsLabel] = React.useState('');
 
   const isTimerMode =
     pathname.toUpperCase().replace('/', '') === APPLICATION_MODES.TIMER;
-  const { hours, minutes, seconds } = msToTime(state.elapsedMs);
 
   const storePresetLabel = () => {
     const cleanLabel = presetsLabel.trim();
     if (!cleanLabel) return;
-    functions.cacheTimerPresets(cleanLabel);
+    timerFunctions.cacheTimerPresets(cleanLabel);
     setPresetsLabel('');
   };
 
   useEffect(() => {
+    if (!isTimerMode) return;
+
     const hourTick = document.getElementById('hourTick');
     const minuteTick = document.getElementById('minuteTick');
     const secondTick = document.getElementById('secondTick');
@@ -40,7 +43,7 @@ const useTimeCounter = () => {
       hourTick?.focus();
     };
     const handleHourBlur = () => {
-      functions.setElapsedMs(computeMsFromDom());
+      timerFunctions.setElapsedMs(computeMsFromDom());
       hourTick?.setAttribute('contentEditable', 'false');
       logger(`[HourTick] Content: ${hourTick?.innerText}`);
     };
@@ -50,7 +53,7 @@ const useTimeCounter = () => {
       minuteTick?.focus();
     };
     const handleMinuteBlur = () => {
-      functions.setElapsedMs(computeMsFromDom());
+      timerFunctions.setElapsedMs(computeMsFromDom());
       minuteTick?.setAttribute('contentEditable', 'false');
       logger(`[MinuteTick] Content: ${minuteTick?.innerText}`);
     };
@@ -60,7 +63,7 @@ const useTimeCounter = () => {
       secondTick?.focus();
     };
     const handleSecondBlur = () => {
-      functions.setElapsedMs(computeMsFromDom());
+      timerFunctions.setElapsedMs(computeMsFromDom());
       secondTick?.setAttribute('contentEditable', 'false');
       logger(`[SecondTick] Content: ${secondTick?.innerText}`);
     };
@@ -74,7 +77,7 @@ const useTimeCounter = () => {
     secondTick?.addEventListener('click', handleSecondClick);
     secondTick?.addEventListener('blur', handleSecondBlur);
 
-    functions.setElapsedMs(computeMsFromDom());
+    timerFunctions.setElapsedMs(computeMsFromDom());
 
     return () => {
       hourTick?.removeEventListener('click', handleHourClick);
@@ -86,16 +89,13 @@ const useTimeCounter = () => {
       secondTick?.removeEventListener('click', handleSecondClick);
       secondTick?.removeEventListener('blur', handleSecondBlur);
     };
-  }, []);
+  }, [isTimerMode]);
 
   return {
     state: {
-      hours,
-      minutes,
-      seconds,
       isTimerMode,
-      elapsedMs: state.elapsedMs,
-      isRunning: state.running,
+      elapsedMs: isTimerMode ? timerState.elapsedMs : stopwatchState.elapsedMs,
+      isRunning: isTimerMode ? timerState.running : stopwatchState.running,
       presetsLabel,
     },
     functions: {

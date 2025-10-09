@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
+import { msToTime } from '@/common/utils/time.util';
 import ActionButton from '@/components/ActionButton/ActionButton';
 import DisplayTimer from '@/components/DisplayTimer/DisplayTimer';
 import TextInput from '@/components/TextInput/TextInput';
@@ -13,25 +14,26 @@ import useTimeCounter from './timeCounter.hook';
 const TimeCounter: React.FC = () => {
   const t = useTranslations();
   const { state, functions } = useTimeCounter();
-
-  const togglePlayPause = () => {
-    return state.isRunning ? (
-      <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
-    ) : (
-      <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
-    );
-  };
+  const { hours, minutes, seconds } = msToTime(state.elapsedMs);
 
   const renderTimerControls = () => (
     <div className={classes.timerControls}>
-      {togglePlayPause()}
+      {state.isRunning ? (
+        <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
+      ) : (
+        <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
+      )}
       <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
     </div>
   );
 
   const renderStopwatchControls = () => (
     <div className={classes.stopwatchControls}>
-      {togglePlayPause()}
+      {state.isRunning ? (
+        <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
+      ) : (
+        <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
+      )}
       <div className={classes.actionButtons}>
         <ActionButton type={ACTION_TYPES.RESET} size="LARGE" />
         <ActionButton type={ACTION_TYPES.LAP} size="LARGE" />
@@ -44,9 +46,9 @@ const TimeCounter: React.FC = () => {
       <div className={classes.wrapper}>
         <div className={classes.timerPreset}>
           <DisplayTimer
-            hours={state.hours}
-            minutes={state.minutes}
-            seconds={state.seconds}
+            hours={hours}
+            minutes={minutes}
+            seconds={seconds}
             appMode={
               state.isTimerMode
                 ? APPLICATION_MODES.TIMER

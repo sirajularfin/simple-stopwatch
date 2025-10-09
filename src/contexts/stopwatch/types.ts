@@ -1,7 +1,7 @@
 interface IStopwatchState {
   lap: LapTimeRecord;
   elapsedMs: number;
-  isRunning: boolean;
+  running: boolean;
 }
 
 interface IStopwatchFunctions {
