@@ -1,5 +1,5 @@
 .container {
-  padding: convertPxToRem(20) 0;
+  padding: convertPxToRem(20);
   background-color: color(blue-900);
   @include media-query(lg) {
     padding: convertPxToRem(15) convertPxToRem(20);

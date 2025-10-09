@@ -1,7 +1,7 @@
 .table {
   margin: 0 auto;
   max-width: $default-max-width;
-  width: 100%;
+  width: calc(100% - convertPxToRem(20));
   border-collapse: separate;
   border-spacing: 0 convertPxToRem(10);
   @include media-query(lg) {
