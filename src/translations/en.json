@@ -6,7 +6,7 @@
     }
   },
   "footer": {
-    "text": "© {year} Simple Stopwatch. All rights reserved."
+    "text": "© {year} Focus Timer & Stopwatch. Made with ❤️ by Sirajul Arfin."
   },
   "button_play": "Play",
   "savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
