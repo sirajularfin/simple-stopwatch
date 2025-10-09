@@ -1,10 +1,10 @@
-export interface ITimerState {
+interface ITimerState {
   elapsedMs: number;
   running: boolean;
-  storedPresets: Record<string, number>;
+  storedPresets: TimerPresetRecord;
 }
 
-export interface ITimerFunctions {
+interface ITimerFunctions {
   start: () => void;
   pause: () => void;
   stop: () => void;
@@ -13,6 +13,8 @@ export interface ITimerFunctions {
   findTimerPresets: (index: number) => void;
   setElapsedMs: React.Dispatch<React.SetStateAction<number>>;
 }
+
+export type TimerPresetRecord = Record<string, number>;
 
 export interface ITimerContextProps {
   state: ITimerState;

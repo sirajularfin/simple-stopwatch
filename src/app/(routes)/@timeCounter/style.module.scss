@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @include media-query(md) {
+  @include media-query(lg) {
     align-items: stretch;
   }
 }
@@ -18,20 +17,50 @@
   display: flex;
   gap: convertPxToRem(24);
   align-items: flex-end;
-
-  @include media-query(md) {
-    margin: 0 convertPxToRem(10);
+  @include media-query(lg) {
+    margin: 0 convertPxToRem(80);
     flex-direction: column;
     align-items: center;
+  }
+  @include media-query(md) {
+    margin: 0 convertPxToRem(10);
+  }
+}
+
+.timerControls {
+  display: flex;
+  flex-direction: column;
+  gap: convertPxToRem(20);
+  @include media-query(lg) {
+    flex-direction: row;
+    gap: convertPxToRem(60);
+  }
+  @include media-query(md) {
+    flex-direction: row;
+    gap: convertPxToRem(20);
+  }
+}
+
+.stopwatchControls {
+  display: flex;
+  flex-direction: column;
+  gap: convertPxToRem(50);
+  @include media-query(lg) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
   }
 }
 
 .actionButtons {
   display: flex;
   flex-direction: column;
-  gap: convertPxToRem(20);
-
-  @include media-query(md) {
+  gap: convertPxToRem(5);
+  @include media-query(lg) {
     flex-direction: row;
+    gap: convertPxToRem(60);
+  }
+  @include media-query(md) {
+    gap: convertPxToRem(20);
   }
 }

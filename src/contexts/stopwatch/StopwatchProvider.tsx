@@ -5,62 +5,17 @@ import React, {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
-import { IStopwatchContextProps } from './types';
+
+import { IStopwatchContextProps, LapTimeRecord } from './types';
 
 const StopwatchContext = createContext<IStopwatchContextProps | undefined>(
   undefined
 );
-
-export const StopwatchProvider: React.FC<PropsWithChildren> = ({
-  children,
-}) => {
-  const [time, setTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  const start = useCallback(() => {
-    if (!isRunning) {
-      setIsRunning(true);
-      intervalRef.current = setInterval(() => {
-        setTime(prev => prev + 1);
-      }, 1000);
-    }
-  }, [isRunning]);
-
-  const stop = useCallback(() => {
-    setIsRunning(false);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  }, []);
-
-  const reset = useCallback(() => {
-    setTime(0);
-    setIsRunning(false);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  }, []);
-
-  React.useEffect(() => {
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  return (
-    <StopwatchContext.Provider value={{ time, isRunning, start, stop, reset }}>
-      {children}
-    </StopwatchContext.Provider>
-  );
-};
 
 export const useStopwatch = () => {
   const context = useContext(StopwatchContext);
@@ -68,4 +23,98 @@ export const useStopwatch = () => {
     throw new Error('useStopwatch must be used within a StopwatchProvider');
   }
   return context;
+};
+
+export const StopwatchProvider: React.FC<PropsWithChildren> = ({
+  children,
+}) => {
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [lap, setLap] = useState<LapTimeRecord>([]);
+
+  // requestAnimationFrame refs
+  const rafRef = useRef<number | null>(null);
+  const lastTsRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, []);
+
+  const tick = useCallback((ts: number) => {
+    if (lastTsRef.current === null) {
+      lastTsRef.current = ts;
+    }
+    const delta = ts - lastTsRef.current;
+    lastTsRef.current = ts;
+    setElapsedMs(prev => prev + delta);
+    if (rafRef.current !== null) {
+      rafRef.current = requestAnimationFrame(tick);
+    }
+  }, []);
+
+  const start = useCallback(() => {
+    if (running) return;
+    setRunning(true);
+    lastTsRef.current = null;
+    rafRef.current = requestAnimationFrame(tick);
+  }, [running, tick]);
+
+  const stop = useCallback(() => {
+    setRunning(false);
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    lastTsRef.current = null;
+  }, []);
+
+  const reset = useCallback(() => {
+    setElapsedMs(0);
+    setLap([]);
+    setRunning(false);
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    lastTsRef.current = null;
+  }, []);
+
+  const recordLap = useCallback(() => {
+    setLap(prev => {
+      const newLap = [...prev];
+      const splitTime = newLap.length
+        ? elapsedMs - newLap[newLap.length - 1][1]
+        : elapsedMs;
+      newLap.unshift([splitTime, elapsedMs]);
+      return newLap;
+    });
+  }, [elapsedMs]);
+
+  const value = useMemo<IStopwatchContextProps>(
+    () => ({
+      state: {
+        lap,
+        elapsedMs,
+        running,
+      },
+      functions: {
+        start,
+        stop,
+        reset,
+        recordLap,
+      },
+    }),
+    [lap, elapsedMs, running, start, stop, reset, recordLap]
+  );
+
+  return (
+    <StopwatchContext.Provider value={value}>
+      {children}
+    </StopwatchContext.Provider>
+  );
 };

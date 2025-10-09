@@ -1,6 +1,9 @@
 .container {
-  padding: convertPxToRem(20) 0;
+  padding: convertPxToRem(20);
   background-color: color(blue-900);
+  @include media-query(lg) {
+    padding: convertPxToRem(15) convertPxToRem(20);
+  }
 
   .navigation {
     margin: 0 auto;
@@ -16,9 +19,5 @@
 
   li {
     list-style: none;
-  }
-
-  @include media-query(lg) {
-    padding: convertPxToRem(15) convertPxToRem(20);
   }
 }
