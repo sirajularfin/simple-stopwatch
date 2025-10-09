@@ -19,7 +19,7 @@ const useTimeCounter = () => {
 
   const storePresetLabel = () => {
     const cleanLabel = presetsLabel.trim();
-    if (!cleanLabel) return;
+    if (!cleanLabel || !timerState.elapsedMs) return;
     timerFunctions.cacheTimerPresets(cleanLabel);
     setPresetsLabel('');
   };

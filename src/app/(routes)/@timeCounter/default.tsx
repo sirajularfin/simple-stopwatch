@@ -21,7 +21,11 @@ const TimeCounter: React.FC = () => {
       {state.isRunning ? (
         <ActionButton type={ACTION_TYPES.PAUSE} size="LARGE" />
       ) : (
-        <ActionButton type={ACTION_TYPES.PLAY} size="LARGE" />
+        <ActionButton
+          type={ACTION_TYPES.PLAY}
+          size="LARGE"
+          disabled={!state.elapsedMs}
+        />
       )}
       <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
     </div>
@@ -36,7 +40,11 @@ const TimeCounter: React.FC = () => {
       )}
       <div className={classes.actionButtons}>
         <ActionButton type={ACTION_TYPES.RESET} size="LARGE" />
-        <ActionButton type={ACTION_TYPES.LAP} size="LARGE" />
+        <ActionButton
+          type={ACTION_TYPES.LAP}
+          size="LARGE"
+          disabled={!state.elapsedMs}
+        />
       </div>
     </div>
   );
