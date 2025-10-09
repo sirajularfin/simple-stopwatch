@@ -9,13 +9,13 @@ const Footer: React.FC = async () => {
 
   return (
     <footer className={classes.container}>
-      <Typography variant="bodyMedium">
+      <Typography variant="bodySmall">
         {t.rich('text', {
           span: children => <span>{children}</span>,
           year: new Date().getFullYear(),
         })}
       </Typography>
-      <Typography variant="bodyMedium">{t('creator')}</Typography>
+      <Typography variant="bodySmall">{t('creator')}</Typography>
     </footer>
   );
 };
