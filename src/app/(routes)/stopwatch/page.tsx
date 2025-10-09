@@ -26,9 +26,9 @@ export default function Stopwatch() {
         </tr>
       </thead>
       <tbody>
-        {state.lap.map((lap, index) => (
-          <tr key={index}>
-            <td align="left">{index + 1}</td>
+        {[...state.lap].reverse().map((lap, index) => (
+          <tr key={state.lap.length - index}>
+            <td align="left">{state.lap.length - index}</td>
             <td align="center">{formatTimeWithMs(lap[0])}</td>
             <td align="right">{formatTimeWithMs(lap[1])}</td>
           </tr>
