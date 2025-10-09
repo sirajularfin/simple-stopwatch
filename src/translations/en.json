@@ -6,7 +6,8 @@
     }
   },
   "footer": {
-    "text": "© {year} Focus Timer & Stopwatch. Made with ❤️ by Sirajul Arfin."
+    "text": "© {year} Focus Timer & Stopwatch. ",
+    "creator": "Made with ❤️ by Sirajul Arfin."
   },
   "button_play": "Play",
   "savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
