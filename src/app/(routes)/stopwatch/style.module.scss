@@ -88,3 +88,24 @@
     }
   }
 }
+
+.rowsWithoutIcon {
+  margin-right: convertPxToRem(30);
+  @include media-query(md) {
+    margin-right: convertPxToRem(17);
+  }
+}
+
+.rowsWithIcon {
+  margin-right: convertPxToRem(6);
+}
+
+.SLOWEST_LAP {
+  border-color: color(red-500) !important;
+  color: color(red-500) !important;
+}
+
+.FASTEST_LAP {
+  border-color: color(teal-500) !important;
+  color: color(teal-500) !important;
+}
