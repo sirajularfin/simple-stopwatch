@@ -59,11 +59,10 @@
     text-transform: uppercase;
     @include media-query(md) {
       font-size: convertPxToRem(12);
-      padding: convertPxToRem(14) convertPxToRem(16);
+      padding: convertPxToRem(14) convertPxToRem(20);
     }
     @include media-query(sm) {
       font-size: convertPxToRem(10);
-      padding: convertPxToRem(14) convertPxToRem(14);
     }
   }
 
@@ -92,7 +91,7 @@
 .rowsWithoutIcon {
   margin-right: convertPxToRem(30);
   @include media-query(md) {
-    margin-right: convertPxToRem(17);
+    margin-right: convertPxToRem(20);
   }
 }
 
