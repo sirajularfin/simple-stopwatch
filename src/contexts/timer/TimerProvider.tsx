@@ -47,8 +47,8 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   // Load presets from storage on mount
   useEffect(() => {
     const response = loadItemFromStorage(TIMER_PRESET_KEY);
-    if (response) {
-      const timerPresets = JSON.parse(response);
+    const timerPresets = JSON.parse(response ?? '{}');
+    if (response && Object.keys(timerPresets).length) {
       setStoredPresets(timerPresets);
     } else {
       const presetsObj = TIMER_PRESET_OPTIONS.reduce((acc, item) => {
