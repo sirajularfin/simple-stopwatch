@@ -4,6 +4,9 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 convertPxToRem(10);
+  @include media-query(lg) {
+    width: calc(100% - convertPxToRem(80));
+  }
   @include media-query(md) {
     width: calc(100% - convertPxToRem(20));
   }

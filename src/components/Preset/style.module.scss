@@ -4,6 +4,14 @@
   width: convertPxToRem(180);
   max-height: convertPxToRem(180);
   padding: convertPxToRem(18) convertPxToRem(20);
+  filter: drop-shadow(
+      convertPxToRem(-5) convertPxToRem(-5) convertPxToRem(10)
+        rgba(color(blue-100), 0.5)
+    )
+    drop-shadow(
+      convertPxToRem(5) convertPxToRem(5) convertPxToRem(10)
+        rgba(color(blue-100), 0.5)
+    );
   @include media-query(md) {
     display: flex;
     justify-content: space-between;
