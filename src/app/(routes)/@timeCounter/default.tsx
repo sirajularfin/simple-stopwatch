@@ -40,7 +40,11 @@ const TimeCounter: React.FC = () => {
       )}
       <div className={classes.actionButtons}>
         <ActionButton type={ACTION_TYPES.RESET} size="LARGE" />
-        <ActionButton type={ACTION_TYPES.LAP} size="LARGE" />
+        <ActionButton
+          type={ACTION_TYPES.LAP}
+          size="LARGE"
+          disabled={!state.elapsedMs}
+        />
       </div>
     </div>
   );
