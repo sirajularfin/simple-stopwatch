@@ -1,3 +1,4 @@
+import { ArrowDownIcon, ArrowUpIcon } from '@/assets';
 import { APPLICATION_MODES } from '@/common/types/constants';
 import { padWithZeros } from '@/common/utils/time.util';
 import classNames from 'classnames';
