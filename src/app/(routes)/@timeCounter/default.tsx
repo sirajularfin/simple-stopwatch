@@ -70,7 +70,7 @@ const TimeCounter: React.FC = () => {
           />
           {state.isTimerMode && (
             <TextInput
-              placeholder={t('savePreset_placeholder')}
+              placeholder={t('savePreset.placeholder')}
               value={state.presetsLabel}
               onChange={e => functions.setPresetsLabel(e.target.value)}
               onSuffixIconClick={functions.storePresetLabel}

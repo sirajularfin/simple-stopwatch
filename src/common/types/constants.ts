@@ -31,10 +31,10 @@ export enum TIMER_PRESETS {
 }
 
 export const TIMER_PRESET_OPTIONS = [
-  { label: '1 Minute', value: TIMER_PRESETS.ONE_MINUTE },
-  { label: '5 Minutes', value: TIMER_PRESETS.FIVE_MINUTES },
-  { label: '10 Minutes', value: TIMER_PRESETS.TEN_MINUTES },
-  { label: '15 Minutes', value: TIMER_PRESETS.FIFTEEN_MINUTES },
-  { label: '30 Minutes', value: TIMER_PRESETS.THIRTY_MINUTES },
-  { label: '60 Minutes', value: TIMER_PRESETS.SIXTY_MINUTES },
+  { label: 'preset.1_min', value: TIMER_PRESETS.ONE_MINUTE },
+  { label: 'preset.5_min', value: TIMER_PRESETS.FIVE_MINUTES },
+  { label: 'preset.10_min', value: TIMER_PRESETS.TEN_MINUTES },
+  { label: 'preset.15_min', value: TIMER_PRESETS.FIFTEEN_MINUTES },
+  { label: 'preset.30_min', value: TIMER_PRESETS.THIRTY_MINUTES },
+  { label: 'preset.60_min', value: TIMER_PRESETS.SIXTY_MINUTES },
 ];

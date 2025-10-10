@@ -15,7 +15,7 @@ const TextInput: React.FC<IProps> = ({
   onSuffixIconClick,
   ...props
 }) => {
-  const t = useTranslations();
+  const t = useTranslations('savePreset');
 
   return (
     <div
@@ -29,7 +29,7 @@ const TextInput: React.FC<IProps> = ({
         className={classes.saveBtn}
         onClick={onSuffixIconClick}
       >
-        {t('savePreset_button')}
+        {t('submitBtn')}
       </Typography>
     </div>
   );

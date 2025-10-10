@@ -9,11 +9,19 @@
     "text": "© {year} Focus Timer & Stopwatch. ",
     "creator": "Developed by Sirajul Arfin."
   },
-  "button_play": "Play",
-  "savePreset_placeholder": "E.g. Workout, Pomodoro, Study…",
-  "savePreset_button": "Save Preset",
-  "shortcut_tips": "Shortcut keys: Press ␣ Space to pause/resume · Press ⌫ Delete to reset.",
+  "savePreset": {
+    "placeholder": "E.g. Workout, Pomodoro, Study…",
+    "submitBtn": "Save Preset"
+  },
   "preset_label": "Preset {index}",
+  "preset": {
+    "1_min": "1 Minute",
+    "5_min": "5 Minutes",
+    "10_min": "10 Minutes",
+    "15_min": "15 Minutes",
+    "30_min": "30 Minutes",
+    "60_min": "60 Minutes"
+  },
   "stopwatch_lap": {
     "lap_number": "Lap",
     "lap_time": "Lap Time",
