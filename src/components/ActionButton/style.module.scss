@@ -60,6 +60,10 @@
 
 .STOP_BUTTON {
   background-color: color(red-500);
+  &:disabled {
+    background-color: color(grey-300);
+    cursor: not-allowed;
+  }
 }
 
 .LAP_BUTTON {

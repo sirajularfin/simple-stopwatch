@@ -27,7 +27,11 @@ const TimeCounter: React.FC = () => {
           disabled={!state.elapsedMs}
         />
       )}
-      <ActionButton type={ACTION_TYPES.STOP} size="LARGE" />
+      <ActionButton
+        type={ACTION_TYPES.STOP}
+        size="LARGE"
+        disabled={!state.isRunning && !state.elapsedMs}
+      />
     </div>
   );
 
