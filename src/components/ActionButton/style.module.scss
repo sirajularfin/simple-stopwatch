@@ -2,6 +2,7 @@
   border-radius: convertPxToRem(50);
   border: none;
   cursor: pointer;
+  user-select: none;
   line-height: 0;
   & svg {
     width: 100%;
