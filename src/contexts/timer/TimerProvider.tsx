@@ -20,6 +20,7 @@ import {
   overrideStorageItem,
   saveToLocalStorage,
 } from '@/common/utils/storage.util';
+import { useTranslations } from 'next-intl';
 import { ITimerContextProps, TimerPresetRecord } from './types';
 
 const TimerContext = createContext<ITimerContextProps | undefined>(undefined);
@@ -35,6 +36,8 @@ export const useTimer = () => {
 export const TimerProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const t = useTranslations();
+
   // State
   const [running, setRunning] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
@@ -52,11 +55,12 @@ export const TimerProvider: React.FC<React.PropsWithChildren> = ({
       setStoredPresets(timerPresets);
     } else {
       const presetsObj = TIMER_PRESET_OPTIONS.reduce((acc, item) => {
-        acc[item.label] = item.value;
+        acc[t(item.label)] = item.value;
         return acc;
       }, {} as TimerPresetRecord);
       const presets = JSON.stringify(presetsObj);
       saveToLocalStorage(TIMER_PRESET_KEY, presets);
+      setStoredPresets(presetsObj);
     }
   }, []);
 

@@ -2,6 +2,7 @@
   border-radius: convertPxToRem(50);
   border: none;
   cursor: pointer;
+  user-select: none;
   line-height: 0;
   & svg {
     width: 100%;
@@ -33,6 +34,10 @@
 
 .PLAY_BUTTON {
   background-color: color(green-500);
+  &:disabled {
+    background-color: color(grey-300);
+    cursor: not-allowed;
+  }
 }
 
 .EDIT_BUTTON {
@@ -56,10 +61,18 @@
 
 .STOP_BUTTON {
   background-color: color(red-500);
+  &:disabled {
+    background-color: color(grey-300);
+    cursor: not-allowed;
+  }
 }
 
 .LAP_BUTTON {
   background-color: color(green-500);
   color: color(white);
   text-transform: uppercase;
+  &:disabled {
+    background-color: color(grey-300);
+    cursor: not-allowed;
+  }
 }

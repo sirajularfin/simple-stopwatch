@@ -3,18 +3,17 @@
   flex-direction: column;
   margin-top: convertPxToRem(45);
   min-height: calc(
-    100vh - convertPxToRem(59.5) - convertPxToRem(45) - convertPxToRem(48.5)
+    100vh - convertPxToRem(59.5) - convertPxToRem(45) - convertPxToRem(44.5)
   );
   @include media-query(lg) {
     margin-top: convertPxToRem(25);
     min-height: calc(
-      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(48.5)
+      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(44.5)
     );
   }
-  @include media-query(sm) {
-    margin-top: convertPxToRem(25);
+  @include media-query(md) {
     min-height: calc(
-      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(46)
+      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(64)
     );
   }
 }
