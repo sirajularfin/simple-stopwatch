@@ -33,6 +33,10 @@
 
 .PLAY_BUTTON {
   background-color: color(green-500);
+  &:disabled {
+    background-color: color(grey-300);
+    cursor: not-allowed;
+  }
 }
 
 .EDIT_BUTTON {
@@ -62,4 +66,8 @@
   background-color: color(green-500);
   color: color(white);
   text-transform: uppercase;
+  &:disabled {
+    background-color: color(grey-300);
+    cursor: not-allowed;
+  }
 }
