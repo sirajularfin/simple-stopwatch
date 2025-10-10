@@ -8,13 +8,12 @@
   @include media-query(lg) {
     margin-top: convertPxToRem(25);
     min-height: calc(
-      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(46)
+      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(44.5)
     );
   }
   @include media-query(sm) {
-    margin-top: convertPxToRem(25);
     min-height: calc(
-      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(65.5)
+      100vh - convertPxToRem(49.5) - convertPxToRem(25) - convertPxToRem(64)
     );
   }
 }
