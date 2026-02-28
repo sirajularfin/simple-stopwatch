@@ -1,15 +1,9 @@
 'use client';
 
 import classNames from 'classnames';
+import Image from 'next/image';
 
-import {
-  DeleteIcon,
-  PauseIcon,
-  ResetIcon,
-  ResumeIcon,
-  StopIcon,
-} from '@/assets';
-import { ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
+import { ACTION_BUTTON_ICONS, ACTION_TYPES, APPLICATION_MODES } from '@/common/types/constants';
 import { useStopwatch } from '@/contexts/stopwatch/StopwatchProvider';
 import { useTimer } from '@/contexts/timer/TimerProvider';
 import { usePathname } from 'next/navigation';
@@ -22,23 +16,6 @@ interface IProps {
   size?: 'MEDIUM' | 'LARGE';
   disabled?: boolean;
 }
-
-const ACTION_BUTTON_ICONS = {
-  [ACTION_TYPES.PAUSE]: <PauseIcon />,
-  [ACTION_TYPES.PLAY]: <ResumeIcon />,
-  [ACTION_TYPES.DELETE]: <DeleteIcon />,
-  [ACTION_TYPES.STOP]: <StopIcon />,
-  [ACTION_TYPES.RESET]: (
-    <span className={classes.RESET_ICON}>
-      <ResetIcon />
-    </span>
-  ),
-  [ACTION_TYPES.LAP]: (
-    <Typography variant="labelLarge" className={classes.LAP_BUTTON}>
-      Lap
-    </Typography>
-  ),
-};
 
 const ActionButton: React.FC<IProps> = ({
   type,
@@ -97,7 +74,27 @@ const ActionButton: React.FC<IProps> = ({
       disabled={disabled}
       aria-label={type.toLowerCase()}
     >
-      {ACTION_BUTTON_ICONS[type as keyof typeof ACTION_BUTTON_ICONS]}
+      {type === ACTION_TYPES.LAP ? (
+        <Typography variant="labelLarge" className={classes.LAP_BUTTON}>
+          Lap
+        </Typography>
+      ) : type === ACTION_TYPES.RESET ? (
+        <span className={classes.RESET_ICON}>
+          <Image
+            src={ACTION_BUTTON_ICONS[type]}
+            alt={type.toLowerCase()}
+            width={24}
+            height={24}
+          />
+        </span>
+      ) : (
+        <Image
+          src={ACTION_BUTTON_ICONS[type]}
+          alt={type.toLowerCase()}
+          width={24}
+          height={24}
+        />
+      )}
     </button>
   );
 };

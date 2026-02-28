@@ -21,7 +21,6 @@ export enum APPLICATION_MODES {
 
 export enum ACTION_TYPES {
   DELETE = 'DELETE',
-  EDIT = 'EDIT',
   PAUSE = 'PAUSE',
   PLAY = 'PLAY',
   RESET = 'RESET',
