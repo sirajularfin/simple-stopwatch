@@ -1,27 +1,12 @@
-import ArrowDownIcon from './svg/arrow-down-icon.svg';
-import ArrowUpIcon from './svg/arrow-up-icon.svg';
-import DeleteIcon from './svg/delete-icon.svg';
-import EditIcon from './svg/edit-icon.svg';
-import ErrorIcon from './svg/error-icon.svg';
-import MailIcon from './svg/mail-icon.svg';
-import PauseIcon from './svg/pause-icon.svg';
-import ResetIcon from './svg/reset-icon.svg';
-import ResumeIcon from './svg/resume-icon.svg';
-import SaveIcon from './svg/save-icon.svg';
-import SprintIcon from './svg/sprint-icon.svg';
-import StopIcon from './svg/stop-icon.svg';
-
-export {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  DeleteIcon,
-  EditIcon,
-  ErrorIcon,
-  MailIcon,
-  PauseIcon,
-  ResetIcon,
-  ResumeIcon,
-  SaveIcon,
-  SprintIcon,
-  StopIcon,
-};
+export { default as ArrowDownIcon } from './svg/arrow-down-icon.svg';
+export { default as ArrowUpIcon } from './svg/arrow-up-icon.svg';
+export { default as DeleteIcon } from './svg/delete-icon.svg';
+export { default as EditIcon } from './svg/edit-icon.svg';
+export { default as ErrorIcon } from './svg/error-icon.svg';
+export { default as MailIcon } from './svg/mail-icon.svg';
+export { default as PauseIcon } from './svg/pause-icon.svg';
+export { default as ResetIcon } from './svg/reset-icon.svg';
+export { default as ResumeIcon } from './svg/resume-icon.svg';
+export { default as SaveIcon } from './svg/save-icon.svg';
+export { default as SprintIcon } from './svg/sprint-icon.svg';
+export { default as StopIcon } from './svg/stop-icon.svg';
