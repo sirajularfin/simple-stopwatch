@@ -1,3 +1,11 @@
+import {
+  DeleteIcon,
+  PauseIcon,
+  ResetIcon,
+  ResumeIcon,
+  StopIcon,
+} from '@/assets';
+
 export const DEFAULT_VALUE_ZERO = 0;
 export const TIMER_PRESET_KEY = 'TIMER_PRESETS';
 export const STOPWATCH_LAP_KEY = 'STOPWATCH_LAPS';
@@ -13,13 +21,20 @@ export enum APPLICATION_MODES {
 
 export enum ACTION_TYPES {
   DELETE = 'DELETE',
-  EDIT = 'EDIT',
   PAUSE = 'PAUSE',
   PLAY = 'PLAY',
   RESET = 'RESET',
   STOP = 'STOP',
   LAP = 'LAP',
 }
+
+export const ACTION_BUTTON_ICONS = {
+  [ACTION_TYPES.PAUSE]: PauseIcon,
+  [ACTION_TYPES.PLAY]: ResumeIcon,
+  [ACTION_TYPES.DELETE]: DeleteIcon,
+  [ACTION_TYPES.STOP]: StopIcon,
+  [ACTION_TYPES.RESET]: ResetIcon,
+};
 
 export enum TIMER_PRESETS {
   ONE_MINUTE = 60_000,
